@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Cards from './Cards';
+import Activities from './Activities';
 import {
   HomeFilled,
   CalendarFilled,
@@ -64,7 +66,10 @@ const Page = () => {
               borderRadius: borderRadiusLG,
             }}
           >
-            Cards ivde varanam
+            <Cards />
+            <br /><br /><br />
+            <h2>Activities:</h2>
+            <Activities />
           </div>
         </Content>
         <Footer
