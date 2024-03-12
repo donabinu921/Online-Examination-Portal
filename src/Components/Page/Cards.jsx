@@ -1,17 +1,19 @@
 import React from 'react';
 import { Card, Col, Row } from 'antd';
-const Cards = () => (
+
+const Cards = ({ card1Title, card1Content, card2Title, card2Content }) => (
   <Row gutter={50}>
     <Col span={12}>
-      <Card title="Upcoming Tests" bordered={false} >
-        2
+      <Card title={card1Title} bordered={false}>
+        {card1Content}
       </Card>
     </Col>
     <Col span={12}>
-      <Card title="Requests Pending" bordered={false}>
-        1
+      <Card title={card2Title} bordered={false}>
+        {card2Content}
       </Card>
     </Col>
   </Row>
 );
+
 export default Cards;

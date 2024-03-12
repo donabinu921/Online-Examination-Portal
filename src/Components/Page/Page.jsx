@@ -66,10 +66,22 @@ const Page = () => {
               borderRadius: borderRadiusLG,
             }}
           >
-            <Cards />
+            {/* HomePage */}
+            {/* <Cards card1Title="Upcoming Tests" card1Content="2" card2Title="Requests Pending" card2Content="1" />
             <br /><br /><br />
             <h2>Activities:</h2>
-            <Activities />
+            <Activities activities={[
+              { description: 'Retest Approved for Chem' },
+              { description: 'Result Published for Biology Test' },
+              { description: 'Feedback Form is Live' },
+            ]} /> */}
+
+            {/* RetestPage */}
+            <h2>Available Retests</h2>
+            <Cards card1Title="Biology 1rst Series" card2Title="Chemistry Lab" />
+            <h2>Approved Requests</h2>
+            <Cards card1Title="Biology Lab" card2Title="Chemistry Assignment Test"/>
+
           </div>
         </Content>
         <Footer

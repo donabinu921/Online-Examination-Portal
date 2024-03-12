@@ -1,6 +1,5 @@
 import LoginSignup from './Components/LoginSignup/LoginSignup';
 import Page from './Components/Page/Page';
-import Cards from './Components/Page/Cards';
 import './App.css';
 
 function App() {
@@ -8,7 +7,6 @@ function App() {
     <div className="main">
       {/* <LoginSignup /> */}
       <Page />
-      {/* <Cards /> */}
     </div>
   );
 }

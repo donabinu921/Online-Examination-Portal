@@ -1,11 +1,10 @@
 import { Timeline } from 'antd';
 
-const Activities = () => (
+const Activities = ({ activities }) => (
   <Timeline>
-    <Timeline.Item>Retest Request for Biology Approved</Timeline.Item>
-    <Timeline.Item>Chemistry Test Results Published</Timeline.Item>
-    <Timeline.Item>Upcoming Test: Math</Timeline.Item>
-    <Timeline.Item>Feedback Form for Week 2</Timeline.Item>
+    {activities.map((activity, index) => (
+      <Timeline.Item key={index}>{`${activity.description}`}</Timeline.Item>
+    ))}
   </Timeline>
 );
 
