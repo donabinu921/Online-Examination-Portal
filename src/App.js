@@ -1,13 +1,12 @@
 import LoginSignup from './Components/LoginSignup/LoginSignup';
-// import Dashboard from './Components/Dashboard/Dashboard';
-import Menubar from './Components/Dashboard/Menubar';
+import Page from './Components/Page/Page';
 import './App.css';
 
 function App() {
   return (
     <div className="main">
       {/* <LoginSignup /> */}
-      <Menubar />
+      <Page />
     </div>
   );
 }
