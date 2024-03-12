@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Cards from './Cards';
 import Activities from './Activities';
+import Buttons from './Buttons';
 import {
   HomeFilled,
   CalendarFilled,
@@ -78,9 +79,9 @@ const Page = () => {
 
             {/* RetestPage */}
             <h2>Available Retests</h2>
-            <Cards card1Title="Biology 1rst Series" card2Title="Chemistry Lab" />
+            <Cards card1Title="Biology 1rst Series" card1Content={<Buttons name={"Request Retest"}/>} card2Title="Chemistry Lab" card2Content={<Buttons name={"Request Retest"} />} />
             <h2>Approved Requests</h2>
-            <Cards card1Title="Biology Lab" card2Title="Chemistry Assignment Test"/>
+            <Cards card1Title="Biology Lab" card1Content={<Buttons name={"March 12"}/>} card2Title="Chemistry Assignment Test" card2Content={<Buttons name={"March 14"}/>} />
 
           </div>
         </Content>
