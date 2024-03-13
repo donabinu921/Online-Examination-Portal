@@ -1,68 +1,19 @@
 import React from 'react';
-import { Badge, Calendar } from 'antd';
-const getListData = (value) => {
-  let listData;
-  switch (value.date()) {
-    case 8:
-      listData = [
-        {
-          type: 'success',
-          content: 'This is usual event.',
-        }
-      ];
-      break;
-    case 10:
-      listData = [
-        {
-          type: 'success',
-          content: 'This is usual event.',
-        }
-      ];
-      break;
-    case 15:
-      listData = [
-        {
-          type: 'success',
-          content: 'This is usual event',
-        }
-      ];
-      break;
-    default:
-  }
-  return listData || [];
-};
-const getMonthData = (value) => {
-  if (value.month() === 8) {
-    return 1394;
-  }
+import { Calendar, theme } from 'antd';
+const onPanelChange = (value, mode) => {
+  console.log(value.format('YYYY-MM-DD'), mode);
 };
 const Calendars = () => {
-  const monthCellRender = (value) => {
-    const num = getMonthData(value);
-    return num ? (
-      <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
-      </div>
-    ) : null;
+  const { token } = theme.useToken();
+  const wrapperStyle = {
+    width: 500,
+    border: `1px solid ${token.colorBorderSecondary}`,
+    borderRadius: token.borderRadiusLG,
   };
-  const dateCellRender = (value) => {
-    const listData = getListData(value);
-    return (
-      <ul className="events">
-        {listData.map((item) => (
-          <li key={item.content}>
-            <Badge status={item.type} text={item.content} />
-          </li>
-        ))}
-      </ul>
-    );
-  };
-  const cellRender = (current, info) => {
-    if (info.type === 'date') return dateCellRender(current);
-    if (info.type === 'month') return monthCellRender(current);
-    return info.originNode;
-  };
-  return <Calendar cellRender={cellRender} />;
+  return (
+    <div style={wrapperStyle}>
+      <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+    </div>
+  );
 };
 export default Calendars;

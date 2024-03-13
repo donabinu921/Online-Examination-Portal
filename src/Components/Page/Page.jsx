@@ -21,7 +21,7 @@ function getItem(label, key, icon) {
 const items = [
   getItem('Home', '1', <HomeFilled />),
   getItem('Assessment', '2', <CopyFilled />),
-  getItem('Calender', '3', <CalendarFilled />),
+  getItem('Calendar', '3', <CalendarFilled />),
   getItem('Request Retest', '4', <MailFilled />),
 ];
 
@@ -85,7 +85,7 @@ const Page = () => {
             <Cards card1Title="Biology Lab" card1Content={<Buttons name={"March 12"}/>} card2Title="Chemistry Assignment Test" card2Content={<Buttons name={"March 14"}/>} /> */}
 
             {/* CalenderPage */}
-            {/* <Calendars /> */}
+            <Calendars />
 
           </div>
         </Content>
