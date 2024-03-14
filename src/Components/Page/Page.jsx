@@ -24,12 +24,17 @@ const items = [
   getItem('Calendar', '3', <CalendarFilled />),
   getItem('Request Retest', '4', <MailFilled />),
 ];
+const events = [
+  { date: '2024-03-15', title: 'Christmas' },
+  { date: '2024-03-07', title: 'New Year' },
+];
 
 const Page = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
   return (
     <Layout
       style={{
@@ -85,7 +90,7 @@ const Page = () => {
             <Cards card1Title="Biology Lab" card1Content={<Buttons name={"March 12"}/>} card2Title="Chemistry Assignment Test" card2Content={<Buttons name={"March 14"}/>} /> */}
 
             {/* CalenderPage */}
-            <Calendars />
+            <Calendars events={events}/>
 
           </div>
         </Content>
@@ -94,7 +99,7 @@ const Page = () => {
             textAlign: 'center',
           }}
         >
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+          {/* Ant Design ©{new Date().getFullYear()} Created by Ant UED */}
         </Footer>
       </Layout>
     </Layout>
