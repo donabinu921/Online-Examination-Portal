@@ -1,26 +1,10 @@
 import { useState } from 'react';
 import Calendars from '../Components/Calendars';
-import {
-  HomeFilled,
-  CalendarFilled,
-  CopyFilled,
-  MailFilled,
-} from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import NavBar from '../Components/NavBar';
+
+import { Breadcrumb, Layout, theme } from 'antd';
 const { Header, Content, Sider } = Layout;
-function getItem(label, key, icon) {
-  return {
-    key,
-    icon,
-    label,
-  };
-}
-const items = [
-  getItem('Home', '1', <HomeFilled />),
-  getItem('Assessment', '2', <CopyFilled />),
-  getItem('Calendar', '3', <CalendarFilled />),
-  getItem('Request Retest', '4', <MailFilled />),
-];
+
 const events = [
   { date: '2024-03-15', title: 'Christmas' },
   { date: '2024-03-07', title: 'New Year' },
@@ -44,7 +28,7 @@ const CalendarPage = () => {
         onCollapse={(value) => setCollapsed(value)}
       >
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['3']} mode="inline" items={items} />
+        <NavBar/>
       </Sider>
       <Layout>
         <Header

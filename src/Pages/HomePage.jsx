@@ -1,27 +1,11 @@
 import { useState } from 'react';
 import Cards from '../Components/Cards';
 import Activities from '../Components/Activities';
-import {
-  HomeFilled,
-  CalendarFilled,
-  CopyFilled,
-  MailFilled,
-} from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import NavBar from '../Components/NavBar';
+
+import { Breadcrumb, Layout, theme } from 'antd';
 const { Header, Content, Sider } = Layout;
-function getItem(label, key, icon) {
-  return {
-    key,
-    icon,
-    label,
-  };
-}
-const items = [
-  getItem('Home', '1', <HomeFilled />),
-  getItem('Assessment', '2', <CopyFilled />),
-  getItem('Calendar', '3', <CalendarFilled />),
-  getItem('Request Retest', '4', <MailFilled />),
-];
+
 const HomePage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -40,7 +24,8 @@ const HomePage = () => {
         onCollapse={(value) => setCollapsed(value)}
       >
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        < NavBar />
+        
       </Sider>
       <Layout>
         <Header
