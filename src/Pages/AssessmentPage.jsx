@@ -6,7 +6,7 @@ import {
   MailFilled,
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 function getItem(label, key, icon) {
   return {
     key,
