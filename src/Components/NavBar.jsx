@@ -20,7 +20,7 @@ const items = [
     return (
       <Menu theme="dark" selectedKeys={[location.pathname]} mode="inline">
         {items.map(item => (
-          <Menu.Item key={item.path}>
+          <Menu.Item icon={item.icon} key={item.path}>
             <Link to={item.path}>
               {item.label}
             </Link>
