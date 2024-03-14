@@ -1,4 +1,3 @@
-import React from 'react'
 import '../Styles/LoginSignup.css'
  
 import user_icon from '../Assets/person.png'

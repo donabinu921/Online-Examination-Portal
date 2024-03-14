@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Col, Row } from 'antd';
 
 const Cards = ({ card1Title, card1Content, card2Title, card2Content }) => (

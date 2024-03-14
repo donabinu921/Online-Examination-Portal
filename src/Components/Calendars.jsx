@@ -1,4 +1,3 @@
-import React from 'react';
 import { Calendar } from 'antd';
 import "../Styles/Calendars.css";
 
