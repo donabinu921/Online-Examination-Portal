@@ -1,4 +1,4 @@
-.event-day-content::before {
+/* .event-day-content::before {
     content: "";
     position: absolute;
     top: 0;
@@ -7,4 +7,24 @@
     bottom: 0;
     background-color: green;
     z-index: -1;
-}
+} */
+
+.events {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .events .ant-badge-status {
+    width: 100%;
+    overflow: hidden;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .notes-month {
+    font-size: 28px;
+    text-align: center;
+  }
+  .notes-month section {
+    font-size: 28px;
+  }

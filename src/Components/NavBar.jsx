@@ -18,7 +18,7 @@ const items = [
     const location = useLocation();
     
     return (
-      <Menu theme="dark" selectedKeys={[location.pathname]} mode="inline">
+      <Menu theme="dark" selectedKeys={[location.pathname]} mode="inline" >
         {items.map(item => (
           <Menu.Item icon={item.icon} key={item.path}>
             <Link to={item.path}>
