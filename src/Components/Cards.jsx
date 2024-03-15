@@ -7,11 +7,13 @@ const Cards = ({ card1Title, card1Content, card2Title, card2Content }) => (
         {card1Content}
       </Card>
     </Col>
-    <Col span={12}>
-      <Card title={card2Title} bordered={false}>
-        {card2Content}
-      </Card>
-    </Col>
+    {card2Title && card2Content && (
+      <Col span={12}>
+        <Card title={card2Title} bordered={false}>
+          {card2Content}
+        </Card>
+      </Col>
+    )}
   </Row>
 );
 

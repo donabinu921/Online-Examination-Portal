@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import NavBar from '../Components/NavBar';
-
+import Cards from '../Components/Cards';
+import Buttons from '../Components/Buttons';
 import { Breadcrumb, Layout, theme } from 'antd';
 const { Header, Content, Sider } = Layout;
 
@@ -42,7 +43,7 @@ const AssessmentPage = () => {
             }}
           >
             {/* <Breadcrumb.Item>Home</Breadcrumb.Item> */}
-            <Breadcrumb.Item><h1>Hello User!</h1></Breadcrumb.Item>
+            <Breadcrumb.Item><h1>Hello Student!</h1></Breadcrumb.Item>
           </Breadcrumb>
           <div
             style={{
@@ -53,7 +54,10 @@ const AssessmentPage = () => {
             }}
           >
           {/* Assessment Page */}
-
+          <Cards card1Title="ATTENDANCE" card1Content="80%" card2Title="INTERNALS" card2Content="34/35" />
+          <br /><br />
+          <h2>Available Tests</h2>
+          <Cards card1Title="Biology Retest" card1Content={<Buttons name={"Take Test"}/>} card2Title="Chemistry Test" card2Content={<Buttons name={"Take Test"}/>}/>
           </div>
         </Content>
       </Layout>

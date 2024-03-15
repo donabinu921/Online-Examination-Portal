@@ -45,7 +45,7 @@ const HomePage = () => {
             }}
           >
             {/* <Breadcrumb.Item>Home</Breadcrumb.Item> */}
-            <Breadcrumb.Item><h1>Hello User!</h1></Breadcrumb.Item>
+            <Breadcrumb.Item><h1>Hello Student!</h1></Breadcrumb.Item>
           </Breadcrumb>
           <div
             style={{
@@ -56,7 +56,7 @@ const HomePage = () => {
             }}
           >
             {/* HomePage */}
-            <Cards card1Title="Upcoming Tests" card1Content="2" card2Title="Requests Pending" card2Content="1" />
+            <Cards card1Title="UPCOMING TESTS" card1Content="2" card2Title="REQUESTS PENDING" card2Content="1" />
             <br /><br /><br />
             <h2>Activities:</h2>
             <Activities activities={[
