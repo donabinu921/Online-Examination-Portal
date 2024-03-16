@@ -57,7 +57,7 @@ const AssessmentPage = () => {
           <Cards card1Title="ATTENDANCE" card1Content="80%" card2Title="INTERNALS" card2Content="34/35" />
           <br /><br />
           <h2>Available Tests</h2>
-          <Cards card1Title="Biology Retest" card1Content={<Buttons name={"Take Test"}/>} card2Title="Chemistry Test" card2Content={<Buttons name={"Take Test"}/>}/>
+          <Cards card1Title="Biology Retest" card1Content={<Buttons name={"Take Test"} to="/test" />} card2Title="Chemistry Test" card2Content={<Buttons name={"Take Test"} to="/test"/>} />
           </div>
         </Content>
       </Layout>
