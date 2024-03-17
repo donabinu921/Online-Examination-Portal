@@ -5,11 +5,6 @@ import NavBar from "../Components/NavBar";
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
 
-const events = [
-  { date: "2024-03-15", title: "Christmas" },
-  { date: "2024-03-07", title: "New Year" },
-];
-
 const CalendarPage = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -42,7 +37,7 @@ const CalendarPage = () => {
           <Content
             style={{
               margin: "0 16px",
-              marginLeft: collapsed ? 80 : 200, // adjust this value based on the width of your Sider
+              marginLeft: collapsed ? 80 : 200,
               overflowY: "auto",
               position: "relative",
             }}
