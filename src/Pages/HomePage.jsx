@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Cards from '../Components/Cards';
 import Activities from '../Components/Activities';
 import NavBar from '../Components/NavBar';
+import '../Styles/HomePage.css';
 
 import { Breadcrumb, Layout, theme } from 'antd';
 const { Header, Content, Sider } = Layout;
@@ -13,6 +14,7 @@ const HomePage = () => {
   } = theme.useToken();
 
   return (
+    <div className="home-page">
     <Layout
       style={{
         minHeight: '100vh',
@@ -68,6 +70,7 @@ const HomePage = () => {
         </Content>
       </Layout>
     </Layout>
+    </div>
   );
 };
 export default HomePage;

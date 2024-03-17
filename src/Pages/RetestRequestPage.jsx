@@ -13,6 +13,8 @@ const RetestRequestPage = () => {
   } = theme.useToken();
 
   return (
+    <div className="home-page">
+
     <Layout
       style={{
         minHeight: '100vh',
@@ -63,7 +65,7 @@ const RetestRequestPage = () => {
           </div>
         </Content>
       </Layout>
-    </Layout>
+    </Layout></div>
   );
 };
 export default RetestRequestPage;

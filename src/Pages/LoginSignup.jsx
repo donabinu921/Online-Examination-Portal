@@ -2,12 +2,12 @@ import '../Styles/LoginSignup.css'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 
-const LoginSignup = ( {onLoginClick} ) => {
+const LoginSignUp = ( {onLoginClick} ) => {
       const onFinish = (values) => {
         console.log('Received values of form: ', values);
       };
       return (
-        <div className='formContainer'>
+        <div className='loginContainer'>
         <Form
           name="normal_login"
           className="login-form"
@@ -54,4 +54,4 @@ const LoginSignup = ( {onLoginClick} ) => {
       );
 };
 
-export default LoginSignup
+export default LoginSignUp;

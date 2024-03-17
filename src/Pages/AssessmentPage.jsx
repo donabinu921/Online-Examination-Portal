@@ -12,6 +12,7 @@ const AssessmentPage = () => {
   } = theme.useToken();
 
   return (
+    <div className="home-page">
     <Layout
       style={{
         minHeight: '100vh',
@@ -61,7 +62,7 @@ const AssessmentPage = () => {
           </div>
         </Content>
       </Layout>
-    </Layout>
+    </Layout></div>
   );
 };
 export default AssessmentPage;
