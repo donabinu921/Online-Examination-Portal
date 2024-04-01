@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.css';
+import TeacherRouter from './Pages/TeacherDashBoard/TeacherRouter';
 import StudentRouter from './Pages/StudentRouter';
 import LoginSignUp from './Pages/LoginSignUp';
 function App() {
@@ -11,7 +12,7 @@ function App() {
 
   return (
     <div className='login-page'>
-      {isLoginClicked ? <StudentRouter /> : <LoginSignUp onLoginClick={handleLoginClick} />}
+      {isLoginClicked ? <TeacherRouter /> : <LoginSignUp onLoginClick={handleLoginClick} />}
     </div>
   );
 }
