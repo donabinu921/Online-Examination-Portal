@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../Styles/LoginSignup.css'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Radio } from 'antd';
 
 const LoginSignUp = ( {onLoginClick} ) => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -53,6 +53,15 @@ const LoginSignUp = ( {onLoginClick} ) => {
             />
           </Form.Item>
     
+          {isSignUp && (
+          <Form.Item name="userType">
+            <Radio.Group>
+              <Radio value="student">Student</Radio>
+              <Radio value="teacher">Teacher</Radio>
+            </Radio.Group>
+          </Form.Item>
+        )}
+
           <Form.Item>
           <Button type="primary" htmlType="submit" className="login-form-button" onClick={onLoginClick}>
             {isSignUp ? 'Sign Up' : 'Login'}
