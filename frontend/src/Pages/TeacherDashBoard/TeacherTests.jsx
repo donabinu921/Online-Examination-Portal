@@ -1,7 +1,8 @@
 import { useState } from "react";
 import NavBar from "../../Components/NavBar";
 import Cards from "../../Components/Cards";
-import Buttons from "../../Components/Buttons";
+import {Button} from "antd";
+import { useNavigate } from "react-router-dom";
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -13,9 +14,9 @@ const TeacherTests = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
   
-
-  const handleSubmitForm = (formData) => {
-     console.log(formData);
+  const navigate = useNavigate();
+  const handleSubmit = (formData) => {
+     navigate("/create-test-form");
   };
   
   return (
@@ -67,7 +68,7 @@ const TeacherTests = () => {
               <Cards
                 card1Title="CREATE A TEST:"
                 card1Content={
-                  <Buttons name={"+ Create Test"} to="/create-test-form" />
+                  <Button type="primary" onClick={handleSubmit}>+ Create Test</Button>
                 }
               />
             </div>

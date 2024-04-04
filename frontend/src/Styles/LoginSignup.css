@@ -24,10 +24,15 @@ h1{
     align-items: center;
     height: 100vh;
     background-color: #2b2b2b;
+    width: 100%;
 }
 
 /* #f5f5f5 */
 
 .login-form-button{
     margin-left: 150px;
+}
+
+.radio-stu-tea{
+    padding-left: 120px;
 }

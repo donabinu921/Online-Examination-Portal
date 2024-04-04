@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import NavBar from '../Components/NavBar';
 import Cards from '../Components/Cards';
-import Buttons from '../Components/Buttons';
+import { Button } from 'antd';
 import { Breadcrumb, Layout, theme } from 'antd';
+import { useNavigate } from 'react-router-dom';
 const { Header, Content, Sider } = Layout;
 
 const AssessmentPage = () => {
@@ -10,6 +11,11 @@ const AssessmentPage = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+const navigate = useNavigate();
+const handleTakeTest = () => {
+  navigate('/test');
+}
 
   return (
     <div className="home-page">
@@ -58,7 +64,7 @@ const AssessmentPage = () => {
           <Cards card1Title="ATTENDANCE" card1Content="80%" card2Title="INTERNALS" card2Content="34/35" />
           <br /><br />
           <h2>Available Tests</h2>
-          <Cards card1Title="Biology Retest" card1Content={<Buttons name={"Take Test"} to="/test" />} card2Title="Chemistry Test" card2Content={<Buttons name={"Take Test"} to="/test"/>} />
+          <Cards card1Title="Biology Retest" card1Content={<Button onClick={handleTakeTest} type="primary">Take Test</Button>} card2Title="Chemistry Test" card2Content={<Button type='primary' onClick={handleTakeTest}>Take Test</Button>} />
           </div>
         </Content>
       </Layout>

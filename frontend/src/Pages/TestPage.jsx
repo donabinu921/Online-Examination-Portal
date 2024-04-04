@@ -1,10 +1,17 @@
 import React from 'react'
 import TestForm from '../Components/TestForm'
 import '../Styles/TestPage.css'
-import Buttons from '../Components/Buttons'
+import {Button} from "antd";
 import CountDown from '../Components/Timer'
+import { useNavigate } from 'react-router-dom';
 
 const TestPage = () => {
+  
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    navigate("/assessment");
+  }
+
   return (
     <div className='testPage'>
       <div className='heading'>
@@ -13,7 +20,7 @@ const TestPage = () => {
       </div>
       <TestForm />
       <div className='testSubmit'>
-      <Buttons name={"Submit"} />
+      <Button type="primary" onClick={handleSubmit}>Submit</Button>
       </div>
     </div>
   )

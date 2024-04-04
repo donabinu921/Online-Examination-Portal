@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Cards from '../Components/Cards';
-import Buttons from '../Components/Buttons';
 import NavBar from '../Components/NavBar';
+import { Button } from 'antd';
 
 import { Breadcrumb, Layout, theme } from 'antd';
 const { Header, Content, Sider } = Layout;
@@ -59,9 +59,9 @@ const RetestRequestPage = () => {
 
             {/* RetestPage */}
             <h2>Available Retests</h2>
-            <Cards card1Title="MPMC 1rst Series" card1Content={<Buttons name={"+ Request Retest"}/>} card2Title="Chemistry Lab" card2Content={<Buttons name={"+ Request Retest"} />} />
+            <Cards card1Title="MPMC 1rst Series" card1Content={<Button type='primary'>+ Request Retest</Button>} card2Title="Chemistry Lab" card2Content={<Button type='primary'>+ Request Retest</Button>} />
             <h2>Approved Requests</h2>
-            <Cards card1Title="Biology Lab" card1Content={<Buttons name={"March 12"}/>} card2Title="Chemistry Assignment Test" card2Content={<Buttons name={"March 14"}/>} />
+            <Cards card1Title="Biology Lab" card1Content={<Button type='default'>March 12</Button>} card2Title="Chemistry Assignment Test" card2Content={<Button type='default'>April 2</Button>} />
           </div>
         </Content>
       </Layout>

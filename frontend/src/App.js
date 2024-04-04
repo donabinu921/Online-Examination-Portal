@@ -1,25 +1,34 @@
-import { useState } from "react";
 import "./App.css";
-import TeacherRouter from "./Pages/TeacherDashBoard/TeacherRouter";
-import TeacherHome from "./Pages/TeacherDashBoard/TeacherHome";
 import CalendarPage from "./Pages/CalendarPage";
-import StudentRouter from "./Pages/StudentRouter";
+import TestPage from "./Pages/TestPage";
 import HomePage from "./Pages/HomePage";
 import RetestRequestPage from "./Pages/RetestRequestPage";
 import LoginSignUp from "./Pages/LoginSignUp";
 import AssessmentPage from "./Pages/AssessmentPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import TeacherHome from "./Pages/TeacherDashBoard/TeacherHome";
+import TeacherCalendar from "./Pages/TeacherDashBoard/TeacherCalendar";
+import TeacherTests from "./Pages/TeacherDashBoard/TeacherTests";
+import TeacherRetests from "./Pages/TeacherDashBoard/TeacherRetests";
+import CreateTestForm from "./Pages/TeacherDashBoard/CreateTestForm";
+import TestCreated from "./Pages/TeacherDashBoard/TestCreated";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="login-page">
+    <div className="main-page">
       <Routes>
-        <Route exact path="/" element={<LoginSignUp />} />
-        <Route exact path="/home" element={<HomePage />} />
-        <Route exact path="/assessment" element={<AssessmentPage />} />
-
-        <Route exact path="/calendar" element={<CalendarPage />} />
-        <Route exact path="/retest-request" element={<RetestRequestPage />} />
+        <Route path="/" element={<LoginSignUp />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/assessment" element={<AssessmentPage />} />
+        <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/retest-request" element={<RetestRequestPage />} />
+        <Route path='/test' element={<TestPage />} />
+        <Route path='/teacher-home' element={<TeacherHome />} />
+        <Route path='/teacher-calendar' element={<TeacherCalendar />} />
+        <Route path='/teacher-tests' element={<TeacherTests />} />
+        <Route path='/teacher-retests' element={<TeacherRetests />} />
+        <Route path='/create-test-form' element={<CreateTestForm />} />
+        <Route path='/test-created' element={<TestCreated />} />
       </Routes>
     </div>
   );

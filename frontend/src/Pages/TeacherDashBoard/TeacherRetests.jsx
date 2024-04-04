@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Cards from '../../Components/Cards';
-import Buttons from '../../Components/Buttons';
+import {Button} from 'antd';
 import NavBar from '../../Components/NavBar';
 import Activities from '../../Components/Activities';
 
@@ -66,7 +66,7 @@ const TeacherRetests = () => {
               { description: 'Aloysious has requested Math Retest' },
             ]} />
             <h2>Approve Requests:</h2>
-            <Cards card1Title="Biology Lab Retest" card1Content={<Buttons name={"Approve"}/>} card2Title="Math Retest" card2Content={<Buttons name={"Approve"}/>} />
+            <Cards card1Title="Biology Lab Retest" card1Content={<Button type="primary">Approve</Button>} card2Title="Math Retest" card2Content={<Button type='primary'>Approve</Button>} />
           </div>
         </Content>
       </Layout>
