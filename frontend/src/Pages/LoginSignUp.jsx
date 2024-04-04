@@ -7,25 +7,28 @@ import userService from "../Services/service.js";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const LoginSignUp = ({ onLoginClick }) => {
-  const [isSignUp, setIsSignUp] = useState(false);
+const LoginSignUp = () => {
   const [users, setUsers] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userType, setUserType] = useState("");
   const [loginUser, setLoginUser] = useState("");
   const navigate = useNavigate();
-  const toggleMode = () => {
-    setIsSignUp(!isSignUp);
-  };
+  
   useEffect(() => {
     retrieveUsers();
   }, []);
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const handleUserTypeChange = e => {
+    setUserType(e.target.value);
   };
 
   const retrieveUsers = () => {
@@ -46,10 +49,20 @@ const LoginSignUp = ({ onLoginClick }) => {
     );
     if (foundUser) {
       setLoginUser(foundUser.username);
-      console.log("success");
-      toast.success("Successfully logged in!");
-      navigate("/home");
-    } else {
+      if (userType === "student" && foundUser.pos === "student") {
+        navigate("/home");
+        console.log("success");
+        toast.success("Successfully logged in!");
+      } else if (userType === "teacher" && foundUser.pos === "teacher") {
+        navigate("/teacher-home");
+        console.log("success");
+        toast.success("Successfully logged in!");
+      } else{
+        console.log("Invalid usertype!");
+        toast.error("Invalid usertype!");
+      }
+    }
+    else {
       console.log("Invalid email or password!");
       toast.error("Invalid email or password!");
     }
@@ -101,7 +114,7 @@ const LoginSignUp = ({ onLoginClick }) => {
           </Form.Item>
 
           <Form.Item name="userType" rules={[{ required: true, message: 'Please select user type!' }]}>
-            <Radio.Group className="radio-stu-tea">
+            <Radio.Group onChange={handleUserTypeChange} className="radio-stu-tea">
               <Radio value="student">Student</Radio>
               <Radio value="teacher">Teacher</Radio>
             </Radio.Group>
