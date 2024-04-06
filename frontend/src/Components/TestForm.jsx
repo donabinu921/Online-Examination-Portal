@@ -1,56 +1,134 @@
-import React from 'react'
-import { List, Radio } from 'antd';
+import React from "react";
+import { List, Radio } from "antd";
 const questions = [
   {
-    title: '1. What is the capital of France?',
+    title: "What is the capital of France?",
+    option1: "Paris",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Paris",
   },
   {
-    title: '2. What is the capital of Germany?',
+    title: "What is the capital of Germany?",
+    option1: "Berlin",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Berlin",
   },
   {
-    title: '3. What is the capital of Spain?',
+    title: "What is the capital of Spain?",
+    option1: "Madrid",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Madrid",
   },
   {
-    title: '4. What is the capital of Italy?',
+    title: "What is the capital of Italy?",
+    option1: "Rome",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Rome",
+  },
+  {
+    title: "What is the capital of Italy?",
+    option1: "Rome",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Rome",
+  },
+  {
+    title: "What is the capital of Italy?",
+    option1: "Rome",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Rome",
+  },
+  {
+    title: "What is the capital of Italy?",
+    option1: "Rome",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Rome",
+  },
+  {
+    title: "What is the capital of Italy?",
+    option1: "Rome",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Rome",
+  },
+  {
+    title: "What is the capital of Italy?",
+    option1: "Rome",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Rome",
+  },
+  {
+    title: "What is the capital of Italy?",
+    option1: "Rome",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Rome",
+  },
+  {
+    title: "What is the capital of Italy?",
+    option1: "Rome",
+    option2: "London",
+    option3: "Tokyo",
+    option4: "New York",
+    answer: "Rome",
   },
 ];
 
-const options = [
-  {
-    title: 'Paris',
-  },
-  {
-    title: 'Berlin',
-  },
-  {
-    title: 'Madrid',
-  },
-  {
-    title: 'Rome',
-  },
-];
-const TestForm = () => (
-  <div className='testFormContainer'>
-    <List
-    itemLayout="horizontal"
-    dataSource={questions}
-    renderItem={(item) => (
-      <List.Item>
-        <List.Item.Meta
-          title={item.title}
-          description={
-            <Radio.Group>
-              {options.map((option) => (
-                <Radio key={option.title} value={option.title}>
-                  {option.title}
-                </Radio>
-              ))}
-            </Radio.Group>
-          }
-        />
-      </List.Item>
-    )}
-  />  
-  </div>
-);
+
+const TestForm = ({ setResults }) => {
+  
+  const handleOptionChange = (e) => {
+    console.log(e.target.value);
+    // setResults(e.target.value); // Pass the selected option value to setResults
+  };
+
+  return (
+    <div className="testFormContainer">
+      <List
+        itemLayout="horizontal"
+        dataSource={questions}
+        renderItem={(item, index) => (
+          <List.Item>
+            <List.Item.Meta
+              title={index + 1 + "." + item.title}
+              description={
+                <Radio.Group onChange={handleOptionChange}>
+                  <Radio key={item.option1} value={item.option1}>
+                    {item.option1}
+                  </Radio>
+                  <Radio key={item.option2} value={item.option2}>
+                    {item.option2}
+                  </Radio>
+                  <Radio key={item.option3} value={item.option3}>
+                    {item.option3}
+                  </Radio>
+                  <Radio key={item.option4} value={item.option4}>
+                    {item.option4}
+                  </Radio>
+                </Radio.Group>
+              }
+            />
+          </List.Item>
+        )}
+      />
+    </div>
+  );
+};
 export default TestForm;

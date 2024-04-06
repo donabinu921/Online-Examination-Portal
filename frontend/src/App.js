@@ -10,7 +10,6 @@ import TeacherCalendar from "./Pages/TeacherDashBoard/TeacherCalendar";
 import TeacherTests from "./Pages/TeacherDashBoard/TeacherTests";
 import TeacherRetests from "./Pages/TeacherDashBoard/TeacherRetests";
 import CreateTestForm from "./Pages/TeacherDashBoard/CreateTestForm";
-import TestCreated from "./Pages/TeacherDashBoard/TestCreated";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -23,12 +22,12 @@ function App() {
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/retest-request" element={<RetestRequestPage />} />
         <Route path='/test' element={<TestPage />} />
+        
         <Route path='/teacher-home' element={<TeacherHome />} />
         <Route path='/teacher-calendar' element={<TeacherCalendar />} />
         <Route path='/teacher-tests' element={<TeacherTests />} />
         <Route path='/teacher-retests' element={<TeacherRetests />} />
         <Route path='/create-test-form' element={<CreateTestForm />} />
-        <Route path='/test-created' element={<TestCreated />} />
       </Routes>
     </div>
   );

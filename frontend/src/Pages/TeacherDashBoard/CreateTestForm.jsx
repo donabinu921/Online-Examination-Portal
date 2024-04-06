@@ -37,7 +37,9 @@ function CreateTestForm() {
 
   const navigate = useNavigate();
   const handleSubmit = () => {
-    navigate('/test-created');
+
+    
+    navigate('/teacher-tests');
 
   }
 

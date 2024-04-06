@@ -4,11 +4,15 @@ import '../Styles/TestPage.css'
 import {Button} from "antd";
 import CountDown from '../Components/Timer'
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const TestPage = () => {
+
+  const [results, setResults] = useState([]);
   
   const navigate = useNavigate();
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    console.log(e.target.value)
     navigate("/assessment");
   }
 
@@ -18,7 +22,7 @@ const TestPage = () => {
       <p>FIRST INTERNAL</p>
       <CountDown />
       </div>
-      <TestForm />
+      <TestForm setResults={setResults} />
       <div className='testSubmit'>
       <Button type="primary" onClick={handleSubmit}>Submit</Button>
       </div>
