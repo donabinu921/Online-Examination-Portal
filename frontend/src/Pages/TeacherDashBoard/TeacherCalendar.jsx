@@ -47,11 +47,11 @@ const CalendarPage = () => {
                 margin: "16px 0px 0px 16px",
               }}
             >
-              {/* <Breadcrumb.Item>Home</Breadcrumb.Item> */}
-              <Breadcrumb.Item>
+              <Breadcrumb>
                 <h1>Hello Teacher!</h1>
-              </Breadcrumb.Item>
+              </Breadcrumb>
             </Breadcrumb>
+            
             <div
               style={{
                 padding: "0px 0px 0px 0px",
@@ -60,8 +60,6 @@ const CalendarPage = () => {
                 borderRadius: borderRadiusLG,
               }}
             >
-              {/* CalenderPage */}
-              {/* <Calendars events={events}/> */}
               <Calendars />
             </div>
           </Content>

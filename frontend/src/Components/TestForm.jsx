@@ -1,106 +1,58 @@
-import React from "react";
-import { List, Radio } from "antd";
+import React, {useState} from "react";
+import { List, Radio, Button } from "antd";
+import Timer from "./Timer";
+import { useNavigate } from "react-router-dom";
+import "../Styles/TestForm.css";
+
 const questions = [
   {
     title: "What is the capital of France?",
-    option1: "Paris",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
+    options: ["Rome", "London", "Tokyo", "New York"],
     answer: "Paris",
   },
   {
     title: "What is the capital of Germany?",
-    option1: "Berlin",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
+    options: ["Rome", "London", "Tokyo", "New York"],
     answer: "Berlin",
   },
   {
     title: "What is the capital of Spain?",
-    option1: "Madrid",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
+    options: ["Rome", "London", "Tokyo", "New York"],
     answer: "Madrid",
   },
   {
     title: "What is the capital of Italy?",
-    option1: "Rome",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
-    answer: "Rome",
-  },
-  {
-    title: "What is the capital of Italy?",
-    option1: "Rome",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
-    answer: "Rome",
-  },
-  {
-    title: "What is the capital of Italy?",
-    option1: "Rome",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
-    answer: "Rome",
-  },
-  {
-    title: "What is the capital of Italy?",
-    option1: "Rome",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
-    answer: "Rome",
-  },
-  {
-    title: "What is the capital of Italy?",
-    option1: "Rome",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
-    answer: "Rome",
-  },
-  {
-    title: "What is the capital of Italy?",
-    option1: "Rome",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
-    answer: "Rome",
-  },
-  {
-    title: "What is the capital of Italy?",
-    option1: "Rome",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
-    answer: "Rome",
-  },
-  {
-    title: "What is the capital of Italy?",
-    option1: "Rome",
-    option2: "London",
-    option3: "Tokyo",
-    option4: "New York",
+    options: ["Rome", "London", "Tokyo", "New York"],
     answer: "Rome",
   },
 ];
 
 
-const TestForm = ({ setResults }) => {
+const TestForm = ({testName}) => {
+
+  const [selectedOptions, setSelectedOptions] = useState([]);
   
-  const handleOptionChange = (e) => {
+  const handleOptionChange = (e, questionIndex) => {
+    const newSelectedOptions = [...selectedOptions];
+    newSelectedOptions[questionIndex] = e.target.value;
+    setSelectedOptions(newSelectedOptions);
     console.log(e.target.value);
-    // setResults(e.target.value); // Pass the selected option value to setResults
   };
+
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    selectedOptions.forEach((option, index) => {
+    console.log(`${index + 1}: ${option}`);
+  });
+  }
 
   return (
     <div className="testFormContainer">
+      <div className="heading">
+      <p>{testName}</p>
+      <Timer />
+      </div>
       <List
         itemLayout="horizontal"
         dataSource={questions}
@@ -109,25 +61,21 @@ const TestForm = ({ setResults }) => {
             <List.Item.Meta
               title={index + 1 + "." + item.title}
               description={
-                <Radio.Group onChange={handleOptionChange}>
-                  <Radio key={item.option1} value={item.option1}>
-                    {item.option1}
-                  </Radio>
-                  <Radio key={item.option2} value={item.option2}>
-                    {item.option2}
-                  </Radio>
-                  <Radio key={item.option3} value={item.option3}>
-                    {item.option3}
-                  </Radio>
-                  <Radio key={item.option4} value={item.option4}>
-                    {item.option4}
-                  </Radio>
+                <Radio.Group onChange={(e) => handleOptionChange(e, index)}>
+                  {item.options.map((option, optionIndex) => (
+                    <Radio key={optionIndex} value={option}>
+                      {option}
+                    </Radio>
+                  ))}
                 </Radio.Group>
               }
             />
           </List.Item>
         )}
       />
+      <div className='testSubmit'>
+      <Button type="primary" onClick={handleSubmit}>Submit</Button>
+      </div>
     </div>
   );
 };

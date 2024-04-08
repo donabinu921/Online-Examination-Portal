@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NavBar from "../../Components/NavBar";
 import Cards from "../../Components/Cards";
-import {Button} from "antd";
+import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import { Breadcrumb, Layout, theme } from "antd";
@@ -9,16 +9,16 @@ const { Header, Content, Sider } = Layout;
 
 const TeacherTests = () => {
   const [collapsed, setCollapsed] = useState(false);
-  
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
-  
+
   const navigate = useNavigate();
   const handleSubmit = (formData) => {
-     navigate("/create-test-form");
+    navigate("/create-test-form");
   };
-  
+
   return (
     <div className="teacher-home">
       <Layout
@@ -51,10 +51,11 @@ const TeacherTests = () => {
                 margin: "16px 0",
               }}
             >
-              {/* <Breadcrumb.Item>Home</Breadcrumb.Item> */}
-              <Breadcrumb.Item>
+              {/*  Home  */}
+
+              <Breadcrumb>
                 <h1>Hello Teacher!</h1>
-              </Breadcrumb.Item>
+              </Breadcrumb>
             </Breadcrumb>
             <div
               style={{
@@ -68,7 +69,9 @@ const TeacherTests = () => {
               <Cards
                 card1Title="CREATE A TEST:"
                 card1Content={
-                  <Button type="primary" onClick={handleSubmit}>+ Create Test</Button>
+                  <Button type="primary" onClick={handleSubmit}>
+                    + Create Test
+                  </Button>
                 }
               />
             </div>
@@ -79,4 +82,3 @@ const TeacherTests = () => {
   );
 };
 export default TeacherTests;
-

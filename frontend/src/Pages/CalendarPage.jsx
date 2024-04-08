@@ -47,10 +47,11 @@ const CalendarPage = () => {
                 margin: "16px 0px 0px 16px",
               }}
             >
-              {/* <Breadcrumb.Item>Home</Breadcrumb.Item> */}
-              <Breadcrumb.Item>
+              {/*  Home  */}
+
+              <Breadcrumb>
                 <h1>Hello Student!</h1>
-              </Breadcrumb.Item>
+              </Breadcrumb>
             </Breadcrumb>
             <div
               style={{
