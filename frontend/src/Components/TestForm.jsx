@@ -1,68 +1,75 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { List, Radio, Button } from "antd";
 import Timer from "./Timer";
 import { useNavigate } from "react-router-dom";
 import "../Styles/TestForm.css";
-import axios from 'axios';
+import axios from "axios";
 
-// const questions = [
-//   {
-//     title: "What is the capital of France?",
-//     options: ["Rome", "London", "Tokyo", "New York"],
-//     answer: "Paris",
-//   },
-//   {
-//     title: "What is the capital of Germany?",
-//     options: ["Rome", "London", "Tokyo", "New York"],
-//     answer: "Berlin",
-//   },
-//   {
-//     title: "What is the capital of Spain?",
-//     options: ["Rome", "London", "Tokyo", "New York"],
-//     answer: "Madrid",
-//   },
-//   {
-//     title: "What is the capital of Italy?",
-//     options: ["Rome", "London", "Tokyo", "New York"],
-//     answer: "Rome",
-//   },
-// ];
-
-
-const TestForm = ({testName}) => {
-
+const TestForm = ({ testName }) => {
   const [questions, setQuestions] = useState([]);
+  const [marks, setMarks] = useState(0);
 
-  axios.get('https://661434ae2fc47b4cf27be0bb.mockapi.io/testPaper')
-  .then((res) => {
-    console.log(res)
-    setQuestions(res.data)
-    console.log(questions,"QUESTIONSSSS")
-  }).catch((error)=>{console.log(error)});
+  const getQuestions = () => {
+    axios
+      .get("https://661434ae2fc47b4cf27be0bb.mockapi.io/testPaper")
+      .then((res) => {
+        setQuestions(res.data);
+        // console.log(questions, "questions");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getQuestions();
+  }, []);
 
   const [selectedOptions, setSelectedOptions] = useState([]);
-  
+
   const handleOptionChange = (e, questionIndex) => {
     const newSelectedOptions = [...selectedOptions];
-    newSelectedOptions[questionIndex] = e.target.value;
+    newSelectedOptions[questionIndex] = {
+      questionIndex: questionIndex,
+      value: e.target.value,
+    };
     setSelectedOptions(newSelectedOptions);
-    console.log(e.target.value);
+    //console.log(selectedOptions, "selectedOptions");
   };
 
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    selectedOptions.forEach((option, index) => {
-    console.log(`${index + 1}: ${option}`);
-  });
-  }
+
+    selectedOptions.forEach((item) => {
+      if (item.value === questions[item.questionIndex].answer) {
+        console.log("Correct");
+        setMarks(marks + 1);
+      } else {
+        console.log("Incorrect");
+      }
+
+      // axios
+      //   .post("www.google.com", { marks: marks })
+      //   .then((res) => {
+      //     console.log(res.data, "marks");
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+      // RETURN TO BACKEND
+      // MARKS
+    });
+  };
 
   return (
     <div className="testFormContainer">
       <div className="heading">
-      <p>{testName}</p>
-      <Timer />
+        <p>{testName}</p>
+        <Timer />
       </div>
+
       <List
         itemLayout="horizontal"
         dataSource={questions}
@@ -71,7 +78,10 @@ const TestForm = ({testName}) => {
             <List.Item.Meta
               title={index + 1 + "." + item.question}
               description={
-                <Radio.Group onChange={(e) => handleOptionChange(e, index)}>
+                <Radio.Group
+                  id={`question-${index}`} // Add a unique ID to the form field element
+                  onChange={(e) => handleOptionChange(e, index)}
+                >
                   {item.options.map((option, optionIndex) => (
                     <Radio key={optionIndex} value={option}>
                       {option}
@@ -83,8 +93,10 @@ const TestForm = ({testName}) => {
           </List.Item>
         )}
       />
-      <div className='testSubmit'>
-      <Button type="primary" onClick={handleSubmit}>Submit</Button>
+      <div className="testSubmit">
+        <Button type="primary" onClick={handleSubmit}>
+          Submit
+        </Button>
       </div>
     </div>
   );
