@@ -3,32 +3,42 @@ import { List, Radio, Button } from "antd";
 import Timer from "./Timer";
 import { useNavigate } from "react-router-dom";
 import "../Styles/TestForm.css";
+import axios from 'axios';
 
-const questions = [
-  {
-    title: "What is the capital of France?",
-    options: ["Rome", "London", "Tokyo", "New York"],
-    answer: "Paris",
-  },
-  {
-    title: "What is the capital of Germany?",
-    options: ["Rome", "London", "Tokyo", "New York"],
-    answer: "Berlin",
-  },
-  {
-    title: "What is the capital of Spain?",
-    options: ["Rome", "London", "Tokyo", "New York"],
-    answer: "Madrid",
-  },
-  {
-    title: "What is the capital of Italy?",
-    options: ["Rome", "London", "Tokyo", "New York"],
-    answer: "Rome",
-  },
-];
+// const questions = [
+//   {
+//     title: "What is the capital of France?",
+//     options: ["Rome", "London", "Tokyo", "New York"],
+//     answer: "Paris",
+//   },
+//   {
+//     title: "What is the capital of Germany?",
+//     options: ["Rome", "London", "Tokyo", "New York"],
+//     answer: "Berlin",
+//   },
+//   {
+//     title: "What is the capital of Spain?",
+//     options: ["Rome", "London", "Tokyo", "New York"],
+//     answer: "Madrid",
+//   },
+//   {
+//     title: "What is the capital of Italy?",
+//     options: ["Rome", "London", "Tokyo", "New York"],
+//     answer: "Rome",
+//   },
+// ];
 
 
 const TestForm = ({testName}) => {
+
+  const [questions, setQuestions] = useState([]);
+
+  axios.get('https://661434ae2fc47b4cf27be0bb.mockapi.io/testPaper')
+  .then((res) => {
+    console.log(res)
+    setQuestions(res.data)
+    console.log(questions,"QUESTIONSSSS")
+  }).catch((error)=>{console.log(error)});
 
   const [selectedOptions, setSelectedOptions] = useState([]);
   
@@ -59,7 +69,7 @@ const TestForm = ({testName}) => {
         renderItem={(item, index) => (
           <List.Item>
             <List.Item.Meta
-              title={index + 1 + "." + item.title}
+              title={index + 1 + "." + item.question}
               description={
                 <Radio.Group onChange={(e) => handleOptionChange(e, index)}>
                   {item.options.map((option, optionIndex) => (
