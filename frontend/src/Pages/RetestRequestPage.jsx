@@ -2,6 +2,7 @@ import { useState } from "react";
 import Cards from "../Components/Cards";
 import NavBar from "../Components/NavBar";
 import { Button } from "antd";
+import { toast } from "react-toastify";
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -11,6 +12,11 @@ const RetestRequestPage = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+const handleRequest = () => {
+  console.log("Retest request sent");
+  toast.success("Retest request sent");
+};
 
   return (
     <div className="home-page">
@@ -61,9 +67,9 @@ const RetestRequestPage = () => {
               <h2>Available Retests</h2>
               <Cards
                 card1Title="MPMC 1rst Series"
-                card1Content={<Button type="primary">+ Request Retest</Button>}
+                card1Content={<Button type="primary" onClick={handleRequest}>+ Request Retest</Button>}
                 card2Title="Chemistry Lab"
-                card2Content={<Button type="primary">+ Request Retest</Button>}
+                card2Content={<Button type="primary" onClick={handleRequest}>+ Request Retest</Button>}
               />
               <h2>Approved Requests</h2>
               <Cards

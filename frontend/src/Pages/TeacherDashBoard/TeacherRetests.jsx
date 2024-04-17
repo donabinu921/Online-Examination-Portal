@@ -3,6 +3,7 @@ import Cards from "../../Components/Cards";
 import { Button } from "antd";
 import NavBar from "../../Components/NavBar";
 import Activities from "../../Components/Activities";
+import { toast } from "react-toastify";
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -12,6 +13,11 @@ const TeacherRetests = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const approveRequest = () => {
+    console.log("Request approved");
+    toast.success("Request approved");
+  };
 
   return (
     <div className="home-page">
@@ -71,9 +77,9 @@ const TeacherRetests = () => {
               <h2>Approve Requests:</h2>
               <Cards
                 card1Title="Biology Lab Retest"
-                card1Content={<Button type="primary">Approve</Button>}
+                card1Content={<Button type="primary" onClick={approveRequest}>Approve</Button>}
                 card2Title="Math Retest"
-                card2Content={<Button type="primary">Approve</Button>}
+                card2Content={<Button type="primary" onClick={approveRequest}>Approve</Button>}
               />
             </div>
           </Content>

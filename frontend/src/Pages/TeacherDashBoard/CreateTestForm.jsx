@@ -57,7 +57,7 @@ function CreateTestForm() {
       answer: question.correctAnswer,
     }));
     console.log(test);
-    //navigate('/teacher-tests');
+    navigate('/teacher-tests');
     toast.success("Test Created Successfully");
   };
 

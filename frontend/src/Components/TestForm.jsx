@@ -61,6 +61,7 @@ const TestForm = ({ testName }) => {
       // RETURN TO BACKEND
       // MARKS
     });
+    navigate("/assessment");
   };
 
   return (
