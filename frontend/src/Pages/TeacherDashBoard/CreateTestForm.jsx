@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Select } from "antd";
+import { Button, Input, Select, DatePicker } from "antd";
 import "../../Styles/CreateTestForm.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,6 +7,7 @@ const { Option } = Select;
 
 function CreateTestForm() {
   const [testName, setTestName] = useState("");
+  const [scheduledDate, setScheduledDate] = useState("");
   const [questions, setQuestions] = useState([]);
 
   const addQuestion = () => {
@@ -21,6 +22,11 @@ function CreateTestForm() {
   const handleTestNameChange = (e) => {
     setTestName(e.target.value);
     console.log(`Test Name: ${e.target.value}`);
+  };
+
+  const handleDateChange = (date, dateString) => {
+    setScheduledDate(dateString);
+    console.log(dateString);
   };
 
   const handleQuestionChange = (index, value) => {
@@ -50,8 +56,9 @@ function CreateTestForm() {
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Test Name: ", testName);
+    console.log("Scheduled date: ", scheduledDate);
     const test = questions.map((question, index) => ({
-      name: testName,
       question: question.question,
       options: question.options,
       answer: question.correctAnswer,
@@ -69,8 +76,9 @@ function CreateTestForm() {
         value={testName}
         onChange={handleTestNameChange}
       />
-      <br />
-      <br />
+      <br /><br />
+      <DatePicker onChange={handleDateChange}/>
+      <br /><br />
       <Button type="primary" onClick={addQuestion}>
         Add a Question
       </Button>
