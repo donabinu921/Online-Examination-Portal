@@ -3,6 +3,7 @@ import { Button, Input, Select, DatePicker } from "antd";
 import "../../Styles/CreateTestForm.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import moment from 'moment';
 const { Option } = Select;
 
 function CreateTestForm() {
@@ -53,6 +54,11 @@ function CreateTestForm() {
     console.log(`Correct Option for Question ${questionIndex + 1}: ${value}`);
   };
 
+  const disabledDate = (current) => {
+    // Can not select days before today and today
+    return current && current < moment().endOf('day');
+  };
+
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -77,7 +83,7 @@ function CreateTestForm() {
         onChange={handleTestNameChange}
       />
       <br /><br />
-      <DatePicker onChange={handleDateChange}/>
+      <DatePicker onChange={handleDateChange} disabledDate={disabledDate}/>
       <br /><br />
       <Button type="primary" onClick={addQuestion}>
         Add a Question
