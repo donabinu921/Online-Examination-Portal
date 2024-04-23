@@ -65,21 +65,14 @@ const TeacherRetests = () => {
               }}
             >
               {/* RetestPage */}
-              <h2>Requests Pending:</h2>
-              <br />
-              <Activities
-                activities={[
-                  { description: "Elizabeth has requested Math Retest" },
-                  { description: "Lakshmi has requested Biology Lab Retest" },
-                  { description: "Aloysious has requested Math Retest" },
-                ]}
-              />
               <h2>Approve Requests:</h2>
               <Cards
-                card1Title="Biology Lab Retest"
-                card1Content={<Button type="primary" onClick={approveRequest}>Approve</Button>}
-                card2Title="Math Retest"
-                card2Content={<Button type="primary" onClick={approveRequest}>Approve</Button>}
+                cardTitle="Biology Lab Retest"
+                cardContent={
+                  <Button type="primary" onClick={approveRequest}>
+                    Approve
+                  </Button>
+                }
               />
             </div>
           </Content>

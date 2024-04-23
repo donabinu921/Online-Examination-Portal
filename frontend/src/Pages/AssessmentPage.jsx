@@ -64,9 +64,9 @@ const AssessmentPage = () => {
             >
               {/* Assessment Page */}
               <Cards
-                card1Title="ATTENDANCE"
-                card1Content="80%"
-                card2Title="INTERNALS"
+                card1Title="Biology Test Score"
+                card1Content="25/30"
+                card2Title="Chemistry Test Score"
                 card2Content="34/35"
               />
               <br />

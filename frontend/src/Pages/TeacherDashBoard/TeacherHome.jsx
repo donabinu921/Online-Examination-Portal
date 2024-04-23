@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { Button } from "antd";
 import NavBar from "../../Components/NavBar";
 import Cards from "../../Components/Cards";
-import Activities from "../../Components/Activities";
 import "../../Styles/TeacherHome.css";
+import ResultsTab from "../../Components/ResultsTab";
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -12,6 +13,11 @@ const TeacherHome = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const [showResultsTab, setShowResultsTab] = useState(false);
+  const toggleResultsTab = () => {
+    setShowResultsTab(prev => !prev);
+  };
 
   return (
     <div className="teacher-home">
@@ -59,22 +65,17 @@ const TeacherHome = () => {
             >
               {/* HomePage */}
               <Cards
-                card1Title="UPCOMING TESTS"
-                card1Content="MPMC Second Series"
-                card2Title="REQUESTS PENDING"
-                card2Content="5"
+                cardTitle="UPCOMING TESTS"
+                cardContent="MPMC Second Series"
               />
               <br />
               <br />
-              <br />
-              <h2>Activities:</h2>
-              <Activities
-                activities={[
-                  { description: "12 requests for First Series Retest" },
-                  { description: "Feedback live for First Series" },
-                  { description: "First Series assessment due" },
-                ]}
-              />
+            <Button type="primary" onClick={toggleResultsTab}>
+            {showResultsTab ? 'Hide Recent Tests' : 'Show Recent Tests'}
+            </Button>
+            <div>
+              {showResultsTab && <ResultsTab />}
+            </div>
             </div>
           </Content>
         </Layout>
