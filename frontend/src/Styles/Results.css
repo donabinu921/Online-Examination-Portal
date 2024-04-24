@@ -1,8 +1,11 @@
 .results-table {
-    width: 100%;
+    width: 20%;
     border-collapse: collapse;
     max-height:500px;
     overflow-y: scroll;
+    position: absolute;
+    top: 60%;
+    left: 50%;
   }
   
   .results-table table {

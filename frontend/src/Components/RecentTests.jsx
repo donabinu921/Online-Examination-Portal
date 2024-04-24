@@ -39,6 +39,7 @@ const RecentTests = () => {
             <Button
               id={result.id}
               type="primary"
+              className="result-button"
               onClick={() => handleResults(result.id)}
             >
               Results
