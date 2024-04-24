@@ -3,7 +3,7 @@ import { Button } from "antd";
 import NavBar from "../../Components/NavBar";
 import Cards from "../../Components/Cards";
 import "../../Styles/TeacherHome.css";
-import ResultsTab from "../../Components/ResultsTab";
+import ResultsTab from "../../Components/RecentTests";
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
