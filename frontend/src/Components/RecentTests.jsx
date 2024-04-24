@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "antd";
 import Results from "./Results";
+import "../Styles/RecentTests.css";
 
 const RecentTests = () => {
   const results = [
@@ -36,7 +37,7 @@ const RecentTests = () => {
           <div key={result.id} className="test-bar">
             <h3>{result.testName}</h3>
             <Button
-              id={`${result.id}`}
+              id={result.id}
               type="primary"
               onClick={() => handleResults(result.id)}
             >

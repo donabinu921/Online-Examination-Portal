@@ -1,0 +1,21 @@
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    max-height:500px;
+    overflow-y: scroll;
+  }
+  
+  .results-table table {
+    width: 100%;
+  }
+  
+  .results-table th,
+  .results-table td {
+    border: 1px solid #000;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .results-table th {
+    background-color: #ffffff;
+  }
