@@ -67,8 +67,8 @@ const TeacherTests = () => {
             >
               {/* HomePage */}
               <Cards
-                card1Title="CREATE A TEST:"
-                card1Content={
+                cardTitle="CREATE A TEST:"
+                cardContent={
                   <Button type="primary" onClick={handleSubmit}>
                     + Create Test
                   </Button>
