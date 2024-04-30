@@ -5,6 +5,7 @@ import MongoDB from "mongodb";
 
 import usersDAO from "./dao/usersDAO.js";
 import examrouter from "./api/exam.routes.js";
+import testDAO from "./dao/testsDAO.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use("*", (req, res) => res.json({ error: "not found" }));
 const MongoClient = MongoDB.MongoClient;
 MongoClient.connect(process.env.DATABASE_URI)
   .then(async (client) => {
+    await testDAO.injectDB(client);
     await usersDAO.injectDB(client);
     app.listen(PORT, () => {
       console.log(`http://localhost:${PORT}`);
