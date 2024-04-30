@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "axios": "^1.6.8",
-    "moment": "^2.30.1"
-  }
-}
