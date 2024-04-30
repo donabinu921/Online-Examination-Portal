@@ -42,6 +42,8 @@ const LoginSignUp = () => {
         console.log(error);
       });
   };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const foundUser = users.find(
@@ -50,6 +52,8 @@ const LoginSignUp = () => {
     if (foundUser) {
       setLoginUser(foundUser.username);
       if (userType === "student" && foundUser.pos === "student") {
+        window.localStorage.setItem("USER", JSON.stringify(foundUser.username));
+        window.localStorage.setItem("USER_NAME", JSON.stringify(foundUser.userid));
         navigate("/home");
         console.log("success");
         toast.success("Successfully logged in!");

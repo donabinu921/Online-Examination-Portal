@@ -60,15 +60,33 @@ function CreateTestForm() {
   };
 
   const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Test Name: ", testName);
     console.log("Scheduled date: ", scheduledDate);
-    const test = questions.map((question, index) => ({
+    
+    const test_questions = {
+      question: questions.map((question, index) => ({
       question: question.question,
       options: question.options,
       answer: question.correctAnswer,
-    }));
+    }))}
+
+    // .post("http://localhost:3000/api/tests", {
+    //   test_name: testName,
+    //   test_date: scheduledDate,
+    //   questions: test_questions,
+    // })
+    // .then((res) => {
+    //   console.log(res.data);
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // }
+    // );
+
+
     console.log(test);
     navigate('/teacher-tests');
     toast.success("Test Created Successfully");

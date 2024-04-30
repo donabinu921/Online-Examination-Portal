@@ -4,14 +4,15 @@ import Timer from "./Timer";
 import { useNavigate } from "react-router-dom";
 import "../Styles/TestForm.css";
 import axios from "axios";
+import userService from "../Services/service.js";
 
 const TestForm = ({ testName }) => {
   const [questions, setQuestions] = useState([]);
   const [marks, setMarks] = useState(0);
 
   const getQuestions = () => {
-    axios
-      .get("https://661434ae2fc47b4cf27be0bb.mockapi.io/testPaper")
+    
+      userService.getAllTest()
       .then((res) => {
         setQuestions(res.data);
         // console.log(questions, "questions");
