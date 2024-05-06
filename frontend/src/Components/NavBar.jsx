@@ -5,6 +5,7 @@ import {
   CalendarFilled,
   CopyFilled,
   MailFilled,
+  LogoutOutlined,
 } from '@ant-design/icons';
 import { Menu } from 'antd';
 const items1 = [
@@ -12,12 +13,14 @@ const items1 = [
     { key: '2', label: 'Assessment', icon:<CopyFilled/>, path: '/assessment' },
     { key: '3', label: 'Calendar', icon:<CalendarFilled/>, path: '/calendar' },
     { key: '4', label: 'Request Retest', icon:<MailFilled/>, path: '/retest-request' },
+    { key: '5', label: 'Logout', icon:<LogoutOutlined/>, path: '/'},
   ];
 const items2 = [
     { key: '1', label: 'Home', icon:<HomeFilled/>, path: '/teacher-home' },
     { key: '2', label: 'Calendar', icon:<CalendarFilled/>, path: '/teacher-calendar' },
     { key: '3', label: 'Tests', icon:<CopyFilled/>, path: '/teacher-tests' },
     { key: '4', label: 'Retests', icon:<MailFilled/>, path: '/teacher-retests' },
+    { key: '5', label: 'Logout', icon:<LogoutOutlined/>, path: '/'},
   ];
 
   const NavBar = ({num}) => {
