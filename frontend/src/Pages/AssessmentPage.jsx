@@ -1,12 +1,19 @@
 import { useState } from "react";
 import NavBar from "../Components/NavBar";
-import Cards from "../Components/Cards";
 import { Button } from "antd";
 import { Breadcrumb, Layout, theme } from "antd";
 import { useNavigate } from "react-router-dom";
+import userService from "../Services/service.js";
+import { Link } from "react-router-dom";
 const { Header, Content, Sider } = Layout;
 
 const AssessmentPage = () => {
+  const data = [
+    {id:1, title: "Title 1", value: "Value 1" },
+    { id:2,title: "Title 2", value: "Value 2" },
+    { id:3,title: "Title 3", value: "Value 3" },
+  ];
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -16,6 +23,22 @@ const AssessmentPage = () => {
   const handleTakeTest = () => {
     navigate("/test");
   };
+
+  const getQuestions = () => {
+    userService
+      .getAllTests()
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  const setTest = (id) => {
+    window.localStorage.setItem("TEST_ID", id);
+  }
 
   return (
     <div className="home-page">
@@ -62,30 +85,20 @@ const AssessmentPage = () => {
                 borderRadius: borderRadiusLG,
               }}
             >
-              {/* Assessment Page */}
-              <Cards
-                card1Title="Biology Test Score"
-                card1Content="25/30"
-                card2Title="Chemistry Test Score"
-                card2Content="34/35"
-              />
               <br />
               <br />
               <h2>Available Tests</h2>
-              <Cards
-                card1Title="Biology Retest"
-                card1Content={
-                  <Button onClick={handleTakeTest} type="primary">
-                    Take Test
-                  </Button>
-                }
-                card2Title="Chemistry Test"
-                card2Content={
-                  <Button type="primary" onClick={handleTakeTest}>
-                    Take Test
-                  </Button>
-                }
-              />
+              <div className="card">
+                {data.map((item) => (
+                  <div key={item.id} className="card-item">
+                    <h3>{item.title}</h3>
+                    <p>{item.value}</p>
+                    <Link to="/test">
+                      <button onClick={()=>{setTest(item.id)}}>Go to Test</button>
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </div>
           </Content>
         </Layout>

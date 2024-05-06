@@ -4,17 +4,20 @@ import Timer from "./Timer";
 import { useNavigate } from "react-router-dom";
 import "../Styles/TestForm.css";
 import axios from "axios";
+import userService from "../Services/service.js";
 
 const TestForm = ({ testName }) => {
   const [questions, setQuestions] = useState([]);
   const [marks, setMarks] = useState(0);
+  const [test,setTest] = useState({});
 
   const getQuestions = () => {
-    axios
-      .get("https://661434ae2fc47b4cf27be0bb.mockapi.io/testPaper")
+      userService.getAllTests()
       .then((res) => {
-        setQuestions(res.data);
-        // console.log(questions, "questions");
+        setQuestions(res.data.tests[0].questions);
+        console.log(res.data.tests[0].questions);
+        setTest(res.data.tests[0]);
+ 
       })
       .catch((error) => {
         console.log(error);
@@ -23,6 +26,7 @@ const TestForm = ({ testName }) => {
 
   useEffect(() => {
     getQuestions();
+    window.localStorage.getItem("TEST_ID");
   }, []);
 
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -67,7 +71,7 @@ const TestForm = ({ testName }) => {
   return (
     <div className="testFormContainer">
       <div className="heading">
-        <p>{testName}</p>
+        <p>{test.test_name}</p>
         <Timer />
       </div>
 
@@ -83,11 +87,11 @@ const TestForm = ({ testName }) => {
                   id={`question-${index}`} // Add a unique ID to the form field element
                   onChange={(e) => handleOptionChange(e, index)}
                 >
-                  {item.options.map((option, optionIndex) => (
+                  {/* {item.options.map((option, optionIndex) => (
                     <Radio key={optionIndex} value={option}>
                       {option}
                     </Radio>
-                  ))}
+                  ))} */}
                 </Radio.Group>
               }
             />
