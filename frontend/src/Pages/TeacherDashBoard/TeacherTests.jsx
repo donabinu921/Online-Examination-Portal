@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import NavBar from "../../Components/NavBar";
 import Cards from "../../Components/Cards";
+import "../../Styles/TeacherTests.css";
 const { Header, Content, Sider } = Layout;
 const { Option } = Select;
 
