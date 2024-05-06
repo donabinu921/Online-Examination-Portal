@@ -9,8 +9,8 @@ const { Header, Content, Sider } = Layout;
 
 const HomePage = () => {
 
-  const USER = JSON.parse(localStorage.getItem("USER"));
-  const USER_ID = JSON.parse(localStorage.getItem("USER_ID"));
+  const USER = JSON.parse(window.localStorage.getItem("USER"));
+  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
 
   const [collapsed, setCollapsed] = useState(false);
   const {
