@@ -5,6 +5,8 @@ import { Breadcrumb, Layout, theme } from "antd";
 import { useNavigate } from "react-router-dom";
 import userService from "../Services/service.js";
 import { Link } from "react-router-dom";
+import "../Styles/AssessmentPage.css";
+
 const { Header, Content, Sider } = Layout;
 
 const AssessmentPage = () => {
@@ -79,14 +81,13 @@ const AssessmentPage = () => {
             </Breadcrumb>
             <div
               style={{
-                padding: 24,
+                padding: 30,
                 minHeight: 360,
                 background: colorBgContainer,
                 borderRadius: borderRadiusLG,
               }}
             >
-              <br />
-              <br />
+        
               <h2>Available Tests</h2>
               <div className="card">
                 {data.map((item) => (
@@ -94,7 +95,7 @@ const AssessmentPage = () => {
                     <h3>{item.title}</h3>
                     <p>{item.value}</p>
                     <Link to="/test">
-                      <button onClick={()=>{setTest(item.id)}}>Go to Test</button>
+                      <Button type="primary" onClick={()=>{setTest(item.id)}}>Go to Test</Button>
                     </Link>
                   </div>
                 ))}
