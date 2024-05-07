@@ -4,6 +4,7 @@ import { Button } from "antd";
 import NavBar from "../../Components/NavBar";
 import Activities from "../../Components/Activities";
 import { toast } from "react-toastify";
+import "../../Styles/TeacherRetests.css"
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -94,17 +95,13 @@ const TeacherRetests = () => {
               }}
             >
               {/* RetestPage */}
-              <h1>{index}</h1>
+              {/* <h1>{index}</h1> */}
               <h2>Approve Requests:</h2>
 
               {retests.map((retest,index) => (
-                <div key={retest.test_id} style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}>
-                  <h2>{retest.student_name}</h2>
-                  <h2>{retest.test_name}</h2>
+                <div key={retest.test_id} className="approve-requests-box">
+                  <h3 className="name">{retest.student_name}</h3>
+                  <h3 className="test-name">{retest.test_name}</h3>
                   <Button type="primary" onClick={()=>{approveRequest(index)}}>
                     Approve
                   </Button>
