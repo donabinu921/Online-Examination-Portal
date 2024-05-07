@@ -21,15 +21,68 @@ const RetestRequestPage = () => {
     console.log("Retest request sent");
     toast.success("Retest request sent");
   };
-
-  const [retests,setRetests] = useState([
+  const [retests, setRetests] = useState([
     {
       test_id: 1,
       test_name: "Biology",
-      student_id: 1,
+      status: "Unattempted",
+    },
+    {
+      test_id: 2,
+      test_name: "Physics",
       status: "Approved",
+    },
+    {
+      test_id: 3,
+      test_name: "Chemistry",
+      status: "Pending",
+    },
+    {
+      test_id: 1,
+      test_name: "Biology",
+      status: "Unattempted",
+    },
+    {
+      test_id: 2,
+      test_name: "Physics",
+      status: "Approved",
+    },
+    {
+      test_id: 3,
+      test_name: "Chemistry",
+      status: "Pending",
+    },
+    {
+      test_id: 2,
+      test_name: "Physics",
+      status: "Approved",
+    },
+    {
+      test_id: 3,
+      test_name: "Chemistry",
+      status: "Pending",
+    },
+    {
+      test_id: 4,
+      test_name: "Mathematics",
+      status: "Pending",
+    },
+    {
+      test_id: 5,
+      test_name: "History",
+      status: "Unattempted",
+    },
+    {
+      test_id: 6,
+      test_name: "English",
+      status: "Unattempted",
     }
   ]);
+
+
+  const Approve = (index) => {
+    console.log(retests[index].test_name);
+  }
 
   return (
     <div className="home-page">
@@ -77,10 +130,23 @@ const RetestRequestPage = () => {
               }}
             >
               {/* RetestPage */}
-              
-           
-           
-           
+              <h1>Retest Requests</h1>
+              {retests.map(
+                (retest,index) =>
+                  retest.status === "Unattempted" && (
+                    <div
+                      key={retest.test_id}
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <h2>{retest.test_name}</h2>
+                      <Button type="primary" onClick={()=>{Approve(index)}}>Approve</Button>
+                    </div>
+                  )
+              )}
             </div>
           </Content>
         </Layout>
