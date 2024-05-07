@@ -11,15 +11,42 @@ const { Header, Content, Sider } = Layout;
 const TeacherRetests = () => {
   const USER = JSON.parse(window.localStorage.getItem("USER"));
   const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
+  const [index, setIndex] = useState(0);
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const approveRequest = () => {
-    console.log("Request approved");
+  const approveRequest = (index) => {
+    setIndex(index);
+
+    console.log(retests[index].student_name,retests[index].test_name);
     toast.success("Request approved");
   };
+
+  const [retests, setRetests] = useState([
+    {
+      test_id: 1,
+      test_name: "Biology",
+      student_id: 1,
+      student_name: "Jane Doe",
+      status: "Pending",
+    },
+    {
+      test_id: 2,
+      test_name: "Physics",
+      student_id: 2,
+      student_name: "Imkhan Pussy",
+      status: "Pending",
+    },
+    {
+      test_id: 3,
+      test_name: "Chemistry",
+      student_id: 3,
+      student_name: "John Doe",
+      status: "Pending",
+    },
+  ]);
 
   return (
     <div className="home-page">
@@ -67,15 +94,22 @@ const TeacherRetests = () => {
               }}
             >
               {/* RetestPage */}
+              <h1>{index}</h1>
               <h2>Approve Requests:</h2>
-              <Cards
-                cardTitle="Biology Lab Retest"
-                cardContent={
-                  <Button type="primary" onClick={approveRequest}>
+
+              {retests.map((retest,index) => (
+                <div key={retest.test_id} style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}>
+                  <h2>{retest.student_name}</h2>
+                  <h2>{retest.test_name}</h2>
+                  <Button type="primary" onClick={()=>{approveRequest(index)}}>
                     Approve
                   </Button>
-                }
-              />
+                </div>
+              ))}
             </div>
           </Content>
         </Layout>
