@@ -2,3 +2,11 @@
     height: 100%;
     width: 100vw;
  }
+
+ .outer-box{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+ }

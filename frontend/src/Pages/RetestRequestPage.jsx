@@ -13,10 +13,19 @@ const RetestRequestPage = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-const handleRequest = () => {
-  console.log("Retest request sent");
-  toast.success("Retest request sent");
-};
+  const handleRequest = () => {
+    console.log("Retest request sent");
+    toast.success("Retest request sent");
+  };
+
+  const [retests,setRetests] = useState([
+    {
+      test_id: 1,
+      test_name: "Biology",
+      student_id: 1,
+      status: "Approved",
+    }
+  ]);
 
   return (
     <div className="home-page">
@@ -65,19 +74,12 @@ const handleRequest = () => {
             >
               {/* RetestPage */}
               <h2>Available Retests</h2>
-              <Cards
-                card1Title="MPMC 1rst Series"
-                card1Content={<Button type="primary" onClick={handleRequest}>+ Request Retest</Button>}
-                card2Title="Chemistry Lab"
-                card2Content={<Button type="primary" onClick={handleRequest}>+ Request Retest</Button>}
-              />
+              
+                    
               <h2>Approved Requests</h2>
-              <Cards
-                card1Title="Biology Lab"
-                card1Content={<Button type="default">March 12</Button>}
-                card2Title="Chemistry Assignment Test"
-                card2Content={<Button type="default">April 2</Button>}
-              />
+           
+           
+           
             </div>
           </Content>
         </Layout>

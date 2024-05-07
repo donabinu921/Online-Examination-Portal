@@ -4,6 +4,7 @@ import NavBar from "../../Components/NavBar";
 import Cards from "../../Components/Cards";
 import "../../Styles/TeacherHome.css";
 import ResultsTab from "../../Components/RecentTests";
+import Results from "../../Components/Results";
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -16,7 +17,33 @@ const TeacherHome = () => {
 
   const [showResultsTab, setShowResultsTab] = useState(false);
   const toggleResultsTab = () => {
-    setShowResultsTab(prev => !prev);
+    setShowResultsTab((prev) => !prev);
+  };
+
+  const [results, setResults] = useState([
+    {
+      id: 1,
+      testName: "Test 1",
+    },
+    {
+      id: 2,
+      testName: "Test 2",
+    },
+    {
+      id: 3,
+      testName: "Test 3",
+    },
+  ]);
+
+  const [selectedResultId, setSelectedResultId] = useState(false);
+
+  const handleResults = (id) => {
+    console.log(id);
+    if (selectedResultId === id) {
+      setSelectedResultId(false);
+    } else {
+      setSelectedResultId(id);
+    }
   };
 
   return (
@@ -63,19 +90,30 @@ const TeacherHome = () => {
                 borderRadius: borderRadiusLG,
               }}
             >
-              {/* HomePage */}
-              <Cards
-                cardTitle="UPCOMING TESTS"
-                cardContent="MPMC Second Series"
-              />
-              <br />
-              <br />
-            <Button type="primary" onClick={toggleResultsTab}>
-            {showResultsTab ? 'Hide Recent Tests' : 'Show Recent Tests'}
-            </Button>
-            <div>
-              {showResultsTab && <ResultsTab />}
-            </div>
+
+              <div className="outer-box">
+                <div>
+                  <br />
+                  <div className="test-tab">
+                    {results.map((result) => (
+                      <div key={result.id} className="test-bar">
+                        <h3>{result.testName}</h3>
+                        <Button
+                          id={result.id}
+                          type="primary"
+                          className="result-button"
+                          onClick={() => handleResults(result.id)}
+                        >
+                          Results
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  {selectedResultId && <Results resultId={selectedResultId} />}
+                </div>
+              </div>
             </div>
           </Content>
         </Layout>

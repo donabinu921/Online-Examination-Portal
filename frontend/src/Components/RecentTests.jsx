@@ -61,7 +61,9 @@ const RecentTests = () => {
           </div>
         ))}
       </div>
-       {selectedResultId && <Results resultId={selectedResultId} />}
+      <div>       
+        {selectedResultId && <Results resultId={selectedResultId} />}
+</div>
     </div>
   );
 };

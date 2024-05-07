@@ -76,6 +76,8 @@ const HomePage = () => {
               <br />
               <br />
               <br /> */}
+              <h2>Internals</h2>
+
               <table class="table" >    
                   <thead>
                     <tr>
