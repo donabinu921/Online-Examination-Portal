@@ -3,6 +3,7 @@ import Cards from "../Components/Cards";
 import NavBar from "../Components/NavBar";
 import { Button } from "antd";
 import { toast } from "react-toastify";
+import "../Styles/RetestRequestPage.css";
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -36,11 +37,6 @@ const RetestRequestPage = () => {
       test_id: 3,
       test_name: "Chemistry",
       status: "Pending",
-    },
-    {
-      test_id: 1,
-      test_name: "Biology",
-      status: "Unattempted",
     },
     {
       test_id: 2,
@@ -80,7 +76,7 @@ const RetestRequestPage = () => {
   ]);
 
 
-  const Approve = (index) => {
+  const Request = (index) => {
     console.log(retests[index].test_name);
   }
 
@@ -130,20 +126,16 @@ const RetestRequestPage = () => {
               }}
             >
               {/* RetestPage */}
-              <h1>Retest Requests</h1>
+              <h2>Request Retest</h2>
               {retests.map(
                 (retest,index) =>
                   retest.status === "Unattempted" && (
                     <div
                       key={retest.test_id}
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                      }}
+                      className="retest-requests-box"
                     >
-                      <h2>{retest.test_name}</h2>
-                      <Button type="primary" onClick={()=>{Approve(index)}}>Approve</Button>
+                      <h3>{retest.test_name}</h3>
+                      <Button type="primary" onClick={()=>{Request(index)}}>Request</Button>
                     </div>
                   )
               )}
