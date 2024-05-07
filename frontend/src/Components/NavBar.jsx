@@ -10,7 +10,7 @@ import {
 import { Menu } from 'antd';
 const items1 = [
     { key: '1', label: 'Home', icon:<HomeFilled/>, path: '/home' },
-    { key: '2', label: 'Assessment', icon:<CopyFilled/>, path: '/assessment' },
+    { key: '2', label: 'Take Test', icon:<CopyFilled/>, path: '/assessment' },
     { key: '3', label: 'Calendar', icon:<CalendarFilled/>, path: '/calendar' },
     { key: '4', label: 'Request Retest', icon:<MailFilled/>, path: '/retest-request' },
     { key: '5', label: 'Logout', icon:<LogoutOutlined/>, path: '/'},

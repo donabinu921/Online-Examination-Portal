@@ -76,7 +76,7 @@ const HomePage = () => {
               <br />
               <br />
               <br /> */}
-              <h2>Internals</h2>
+              <h2>Internal Assessment</h2>
 
               <table class="table" >    
                   <thead>
@@ -89,7 +89,7 @@ const HomePage = () => {
                   <tbody>
                     {testScores.map((item, index) => (
                       <tr key={index}>
-                        <th scope="row">{index + 1}</th>
+                        <td scope="row">{index + 1}</td>
                         <td>{item.test_name}</td>
                         <td>{item.mark}</td>
                       </tr>

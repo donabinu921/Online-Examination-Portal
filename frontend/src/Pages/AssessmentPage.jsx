@@ -74,7 +74,7 @@ const AssessmentPage = () => {
               }}
             >
         
-              <h2>Available Tests</h2>
+              <h2>Live Tests</h2>
               <div className="card">
                 {data.map((item) => (
                   <div key={item.id} className="card-item">
