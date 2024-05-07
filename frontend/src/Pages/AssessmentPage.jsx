@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import NavBar from "../Components/NavBar";
 import { Button } from "antd";
 import { Breadcrumb, Layout, theme } from "antd";
@@ -6,15 +6,34 @@ import { useNavigate } from "react-router-dom";
 import userService from "../Services/service.js";
 import { Link } from "react-router-dom";
 import "../Styles/AssessmentPage.css";
-
+import moment from 'moment'; 
 const { Header, Content, Sider } = Layout;
 
+
 const AssessmentPage = () => {
-  const data = [
-    {id:1, title: "Title 1", value: "Value 1" },
-    { id:2,title: "Title 2", value: "Value 2" },
-    { id:3,title: "Title 3", value: "Value 3" },
-  ];
+
+  console.log(moment().format('YYYY-MM-DD'))
+  const [tests,setTests] = useState([]);
+  
+  const getQuestions = () => {
+    userService.getAllTests()
+    .then((res) => {
+      console.log(res.data.tests);
+      setTests(res.data.tests);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+console.log(tests);
+
+useEffect(() => {
+  getQuestions();
+  window.localStorage.getItem("TEST_ID");
+}, []);
+
+
 
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -38,7 +57,7 @@ const AssessmentPage = () => {
         <Sider
           collapsible
           collapsed={collapsed}
-          onCollapse={(value) => setCollapsed(value)}
+          onCollapse={(teacher_name) => setCollapsed(teacher_name)}
         >
           <div className="demo-logo-vertical" />
           <NavBar />
@@ -76,12 +95,12 @@ const AssessmentPage = () => {
         
               <h2>Available Tests</h2>
               <div className="card">
-                {data.map((item) => (
-                  <div key={item.id} className="card-item">
-                    <h3>{item.title}</h3>
-                    <p>{item.value}</p>
+                {tests.map((item) => (
+                  <div key={item._id} className="card-item">
+                    <h3>{item.test_name}</h3>
+                    <p>{item.teacher_name}</p>
                     <Link to="/test">
-                      <Button type="primary" onClick={()=>{setTest(item.id)}}>Go to Test</Button>
+                      <Button type="primary" onClick={()=>{setTest(item._id)}}>Go to Test</Button>
                     </Link>
                   </div>
                 ))}

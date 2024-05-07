@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Cards from "../Components/Cards";
 import Activities from "../Components/Activities";
 import NavBar from "../Components/NavBar";
 import "../Styles/HomePage.css";
+import userService from "../Services/service.js";
+
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
@@ -11,10 +13,25 @@ const HomePage = () => {
   const USER = JSON.parse(window.localStorage.getItem("USER"));
   const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
 
+  const [marks,setMarks] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+//   const getQuestions = () => {
+//     userService.getAllTests()
+//     .then((res) => {
+//       console.log(res.data.tests);
+//       setTests(res.data.tests);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// };
+// useEffect(() => {
+//   getQuestions();
+// }, []);
 
   const testScores = [
     { test_name: "Biology", mark: 50 },
