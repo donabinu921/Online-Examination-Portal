@@ -89,7 +89,7 @@ const TestPage = ({ testName }) => {
   };
 
   const navigate = useNavigate();
-
+  
   const handleSubmit = (e) => {
  // Reset marks to 0
     e.preventDefault();

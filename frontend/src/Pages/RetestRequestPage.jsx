@@ -73,10 +73,7 @@ const RetestRequestPage = () => {
               }}
             >
               {/* RetestPage */}
-              <h2>Available Retests</h2>
               
-                    
-              <h2>Approved Requests</h2>
            
            
            
