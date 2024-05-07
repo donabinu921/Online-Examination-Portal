@@ -1,4 +1,4 @@
-import '../Styles/TestPage.css'
+import "../Styles/TestPage.css";
 import React, { useEffect, useState } from "react";
 import { List, Radio, Button } from "antd";
 import Timer from "../Components/Timer";
@@ -7,104 +7,100 @@ import "../Styles/TestForm.css";
 import axios from "axios";
 import userService from "../Services/service.js";
 
-
 const TestPage = ({ testName }) => {
-  const [questions, setQuestions] = useState([]);
   const [marks, setMarks] = useState(0);
-  const [test,setTest] = useState({});
-  const [tests,setTests] = useState([]);
+  const [test, setTest] = useState({
+    id: "123",
+    test_name: "Andi Kundi",
+    test_date: "2024-05-31",
+    questions: [
+      {
+        question: "Who is motta",
+        options: ["1", "2", "3", "4"],
+        answer: "2",
+      },
+      {
+        question: "aaran motta",
+        options: ["1", "2", "3", "4"],
+        answer: "2",
+      },
+      {
+        question: "aaran motta",
+        options: ["1", "2", "3", "4"],
+        answer: "2",
+      },
+      {
+        question: "aaran motta",
+        options: ["1", "2", "3", "4"],
+        answer: "2",
+      },
+    ],
+  });
+
   const [max, setMax] = useState(0);
-  
-  const testID = window.localStorage.getItem("TEST_ID")
+  const testID = window.localStorage.getItem("TEST_ID");
 
-  const getQuestions = () => {
-  
+  // const getQuestions = () => {
+  //   userService
+  //     .getAllTests()
+  //     .then((res) => {
+  //       const tests = res.data.tests;
 
-    userService.getAllTests()
-      .then((res) => {
-        setTests(res.data.tests);
-        // console.log(res.data.tests);
- 
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  //       const _test = tests.find((test) => test._id === testID);
+  //       setTest(_test);
+  //       console.log(_test);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
-      console.log(tests.find(test => test._id === testID))
-      setTest({
-         id : "123",
-         test_name: "DA",
-         test_date: "2024-05-31",
-         questions: [
-             {
-                 question: "Who is motta",
-                 options: [
-                     "1",
-                     "2",
-                     "3",
-                     "4"
-                 ],
-                 answer: "2"
-             },
-             {
-                 question: "aaran motta",
-                 options: [
-                     "1",
-                     "2",
-                     "3",
-                     "4"
-                 ],
-                 answer: "2"
-             }
-         ]
-     })
+  // useEffect(() => {
+  //   getQuestions();
+  // }, []);
 
-     
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleOptionChange = (e, questionIndex) => {
+    const newSelectedOptions = [...selectedOptions];
+    newSelectedOptions[questionIndex] = {
+      questionIndex: questionIndex,
+      value: e.target.value,
     };
-    
-    useEffect(() => {
-      getQuestions();
-    }, []);
-    
-    const [selectedOptions, setSelectedOptions] = useState([]);
-    
-    const handleOptionChange = (e, questionIndex) => {
-      const newSelectedOptions = [...selectedOptions];
-      newSelectedOptions[questionIndex] = {
-        questionIndex: questionIndex,
-        value: e.target.value,
-      };
-      setSelectedOptions(newSelectedOptions);
-      //console.log(selectedOptions, "selectedOptions");
-    };
-    
-    const navigate = useNavigate();
-    
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      setMax(test.questions.length)
-      
-      selectedOptions.forEach((item) => {
-        if (item.value === questions[item.questionIndex].answer) {
-        console.log("Correct");
-        setMarks(marks + 1);
+    setSelectedOptions(newSelectedOptions);
+    //console.log(selectedOptions, "selectedOptions");
+  };
+
+  const findMarks = () => {
+
+    setMarks(0); // Reset marks to 0
+    let mark = 0; // Functional update to ensure correct value
+    selectedOptions.forEach((item) => {
+      if (item.value === test.questions[item.questionIndex].answer) {
+          mark=mark+1 // Functional update to ensure correct value
       } else {
         console.log("Incorrect");
       }
-
-      // axios
-      //   .post("www.google.com", { marks: marks })
-      //   .then((res) => {
-      //     console.log(res.data, "marks");
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-      // RETURN TO BACKEND
-      // MARKS
-    });
-    navigate("/assessment");
+      
+    }
+  );
+  setMarks(mark); // Update marks
+  console.log("Marks", marks);
   };
+
+  const navigate = useNavigate();
+  
+  const handleSubmit = (e) => {
+ // Reset marks to 0
+    e.preventDefault();
+    setMax(test.questions.length);
+    findMarks();
+    // navigate("/assessment");
+  };
+
+  useEffect(() => {
+    console.log("Marks updated:", marks);
+  }, [marks]); // useEffect will run whenever marks state changes
 
   return (
     <div className="testFormContainer">
@@ -119,11 +115,16 @@ const TestPage = ({ testName }) => {
         renderItem={(item, index) => (
           <List.Item>
             <List.Item.Meta
-              title={index + 1 + "." + item.question}
+              title={`${index + 1}. ${item.question}`}
               description={
                 <Radio.Group
-                  id={`question-${index}`} // Add a unique ID to the form field element
+                  id={`question-${index}`}
                   onChange={(e) => handleOptionChange(e, index)}
+                  value={
+                    selectedOptions[index]
+                      ? selectedOptions[index].value
+                      : undefined
+                  }
                 >
                   {item.options.map((option, optionIndex) => (
                     <Radio key={optionIndex} value={option}>
@@ -132,8 +133,8 @@ const TestPage = ({ testName }) => {
                   ))}
                 </Radio.Group>
               }
-              />
-           </List.Item>
+            />
+          </List.Item>
         )}
       />
       <div className="testSubmit">
@@ -142,7 +143,7 @@ const TestPage = ({ testName }) => {
         </Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default TestPage
+export default TestPage;
