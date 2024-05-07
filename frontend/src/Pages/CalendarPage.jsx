@@ -6,6 +6,10 @@ import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
 
 const CalendarPage = () => {
+
+  const USER = JSON.parse(window.localStorage.getItem("USER"));
+  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -50,7 +54,7 @@ const CalendarPage = () => {
               {/*  Home  */}
 
               <Breadcrumb>
-                <h1>Hello Student!</h1>
+                <h1>Hello {USER}!</h1>
               </Breadcrumb>
             </Breadcrumb>
             <div

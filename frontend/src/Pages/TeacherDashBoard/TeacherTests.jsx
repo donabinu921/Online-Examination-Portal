@@ -12,6 +12,10 @@ const { Header, Content, Sider } = Layout;
 const { Option } = Select;
 
 const TeacherTests = () => {
+
+  const USER = JSON.parse(window.localStorage.getItem("USER"));
+  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
+
   const [collapsed, setCollapsed] = useState(false);
 
   const {
@@ -137,7 +141,7 @@ const TeacherTests = () => {
               {/*  Home  */}
 
               <Breadcrumb>
-                <h1>Hello Teacher!</h1>
+                <h1>Hello {USER}!</h1>
               </Breadcrumb>
             </Breadcrumb>
             <div

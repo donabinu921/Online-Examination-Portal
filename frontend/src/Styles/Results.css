@@ -1,12 +1,13 @@
-/* .results-table {
-    width: 40%;
-    border-collapse: collapse;
-    max-height:500px;
+.results-table {
+  padding: 20px;
+    max-height:600px;
     overflow-y: scroll;
-    position: absolute;
-    top: 60%;
-    left: 55%;
-  } */
+    width: 400px;
+    background-color: #ffffff;
+   border: 1px solid #ffffff;
+   border-radius: 5px;
+   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
   
   .results-table table {
     width: 100%;

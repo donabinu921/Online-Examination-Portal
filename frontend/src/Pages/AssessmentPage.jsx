@@ -10,6 +10,10 @@ import "../Styles/AssessmentPage.css";
 const { Header, Content, Sider } = Layout;
 
 const AssessmentPage = () => {
+
+  const USER = JSON.parse(window.localStorage.getItem("USER"));
+  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
+
   const data = [
     {id:1, title: "Title 1", value: "Value 1" },
     { id:2,title: "Title 2", value: "Value 2" },
@@ -62,7 +66,7 @@ const AssessmentPage = () => {
             >
               {/*  Home  */}
               <Breadcrumb>
-                <h1>Hello Student!</h1>
+                <h1>Hello {USER}!</h1>
               </Breadcrumb>
             </Breadcrumb>
             <div

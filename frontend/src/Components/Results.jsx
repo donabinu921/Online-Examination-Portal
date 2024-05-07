@@ -22,7 +22,7 @@ const Results = ({ resultId }) => {
 
   return (
     <div className="results-table">
-      <h1>{resultId}</h1>
+      {/* <h1>{resultId}</h1> */}
       {marks && (
         <table>
           <thead>

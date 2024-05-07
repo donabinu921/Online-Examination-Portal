@@ -3,13 +3,16 @@ import { Button } from "antd";
 import NavBar from "../../Components/NavBar";
 import Cards from "../../Components/Cards";
 import "../../Styles/TeacherHome.css";
-import ResultsTab from "../../Components/RecentTests";
 import Results from "../../Components/Results";
 
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
 
 const TeacherHome = () => {
+
+  const USER = JSON.parse(window.localStorage.getItem("USER"));
+  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
+
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -79,7 +82,7 @@ const TeacherHome = () => {
               }}
             >
               <Breadcrumb>
-                <h1>Hello Teacher!</h1>
+                <h1>Hello {USER}!</h1>
               </Breadcrumb>
             </Breadcrumb>
             <div
@@ -110,7 +113,7 @@ const TeacherHome = () => {
                     ))}
                   </div>
                 </div>
-                <div>
+                <div className="results-tab">
                   {selectedResultId && <Results resultId={selectedResultId} />}
                 </div>
               </div>
