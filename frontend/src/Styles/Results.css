@@ -1,4 +1,4 @@
-.results-table {
+/* .results-table {
     width: 40%;
     border-collapse: collapse;
     max-height:500px;
@@ -6,7 +6,7 @@
     position: absolute;
     top: 60%;
     left: 55%;
-  }
+  } */
   
   .results-table table {
     width: 100%;
