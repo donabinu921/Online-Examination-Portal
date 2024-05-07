@@ -62,7 +62,7 @@ const HomePage = () => {
               }}
             >
               {/* HomePage */}
-              <Cards
+              {/* <Cards
                 card1Title="UPCOMING TESTS"
                 card1Content="2"
                 card2Title="REQUESTS PENDING"
@@ -70,7 +70,7 @@ const HomePage = () => {
               />
               <br />
               <br />
-              <br />
+              <br /> */}
               <h2>Activities:</h2>
               <Activities
                 activities={[
