@@ -8,7 +8,6 @@ import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
 
 const HomePage = () => {
-
   const USER = JSON.parse(window.localStorage.getItem("USER"));
   const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
 
@@ -16,6 +15,12 @@ const HomePage = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const testScores = [
+    { test_name: "Biology", mark: 50 },
+    { test_name: "Physics", mark: 65 },
+    { test_name: "Chemistry", mark: 55 }
+  ];
 
   return (
     <div className="home-page">
@@ -71,14 +76,24 @@ const HomePage = () => {
               <br />
               <br />
               <br /> */}
-              <h2>Activities:</h2>
-              <Activities
-                activities={[
-                  { description: "Retest Approved for Chem" },
-                  { description: "Result Published for Biology Test" },
-                  { description: "Feedback Form is Live" },
-                ]}
-              />
+              <table class="table" >    
+                  <thead>
+                    <tr>
+                      <th scope="col">Index</th>
+                      <th scope="col">Test Name</th>
+                      <th scope="col">Mark</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {testScores.map((item, index) => (
+                      <tr key={index}>
+                        <th scope="row">{index + 1}</th>
+                        <td>{item.test_name}</td>
+                        <td>{item.mark}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
             </div>
           </Content>
         </Layout>

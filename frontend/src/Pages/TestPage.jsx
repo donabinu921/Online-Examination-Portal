@@ -12,44 +12,80 @@ const TestPage = ({ testName }) => {
   const [questions, setQuestions] = useState([]);
   const [marks, setMarks] = useState(0);
   const [test,setTest] = useState({});
+  const [tests,setTests] = useState([]);
+  const [max, setMax] = useState(0);
+  
+  const testID = window.localStorage.getItem("TEST_ID")
 
   const getQuestions = () => {
-      userService.getAllTests()
+  
+
+    userService.getAllTests()
       .then((res) => {
-        setQuestions(res.data.tests[0].questions);
-        console.log(res.data);
-        setTest(res.data.tests[0]);
+        setTests(res.data.tests);
+        // console.log(res.data.tests);
  
       })
       .catch((error) => {
         console.log(error);
       });
-  };
 
-  useEffect(() => {
-    getQuestions();
-    console.log(window.localStorage.getItem("TEST_ID"))
-  }, []);
+      console.log(tests.find(test => test._id === testID))
+      setTest({
+         id : "123",
+         test_name: "DA",
+         test_date: "2024-05-31",
+         questions: [
+             {
+                 question: "Who is motta",
+                 options: [
+                     "1",
+                     "2",
+                     "3",
+                     "4"
+                 ],
+                 answer: "2"
+             },
+             {
+                 question: "aaran motta",
+                 options: [
+                     "1",
+                     "2",
+                     "3",
+                     "4"
+                 ],
+                 answer: "2"
+             }
+         ]
+     })
 
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
-  const handleOptionChange = (e, questionIndex) => {
-    const newSelectedOptions = [...selectedOptions];
-    newSelectedOptions[questionIndex] = {
-      questionIndex: questionIndex,
-      value: e.target.value,
+     
     };
-    setSelectedOptions(newSelectedOptions);
-    //console.log(selectedOptions, "selectedOptions");
-  };
-
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    selectedOptions.forEach((item) => {
-      if (item.value === questions[item.questionIndex].answer) {
+    
+    useEffect(() => {
+      getQuestions();
+    }, []);
+    
+    const [selectedOptions, setSelectedOptions] = useState([]);
+    
+    const handleOptionChange = (e, questionIndex) => {
+      const newSelectedOptions = [...selectedOptions];
+      newSelectedOptions[questionIndex] = {
+        questionIndex: questionIndex,
+        value: e.target.value,
+      };
+      setSelectedOptions(newSelectedOptions);
+      //console.log(selectedOptions, "selectedOptions");
+    };
+    
+    const navigate = useNavigate();
+    
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      setMax(test.questions.length)
+      
+      selectedOptions.forEach((item) => {
+        if (item.value === questions[item.questionIndex].answer) {
         console.log("Correct");
         setMarks(marks + 1);
       } else {
@@ -79,7 +115,7 @@ const TestPage = ({ testName }) => {
 
       <List
         itemLayout="horizontal"
-        dataSource={questions}
+        dataSource={test.questions}
         renderItem={(item, index) => (
           <List.Item>
             <List.Item.Meta
@@ -89,15 +125,15 @@ const TestPage = ({ testName }) => {
                   id={`question-${index}`} // Add a unique ID to the form field element
                   onChange={(e) => handleOptionChange(e, index)}
                 >
-                  {/* {item.options.map((option, optionIndex) => (
+                  {item.options.map((option, optionIndex) => (
                     <Radio key={optionIndex} value={option}>
                       {option}
                     </Radio>
-                  ))} */}
+                  ))}
                 </Radio.Group>
               }
-            />
-          </List.Item>
+              />
+           </List.Item>
         )}
       />
       <div className="testSubmit">

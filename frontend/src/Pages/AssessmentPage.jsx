@@ -21,22 +21,8 @@ const AssessmentPage = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const navigate = useNavigate();
-  const handleTakeTest = () => {
-    navigate("/test");
-  };
-
-  const getQuestions = () => {
-    userService
-      .getAllTests()
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
+ 
+ 
 
   const setTest = (id) => {
     window.localStorage.setItem("TEST_ID", id);
