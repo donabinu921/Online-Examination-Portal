@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Calendars from "../Components/Calendars";
 import NavBar from "../Components/NavBar";
 import userService from "../Services/service.js";
@@ -7,9 +7,8 @@ const { Header, Content, Sider } = Layout;
 
 const CalendarPage = () => {
   const USER = JSON.parse(window.localStorage.getItem("USER"));
-  const USER_ID =  (window.localStorage.getItem("USER_ID"));
+  const USER_ID = window.localStorage.getItem("USER_ID");
   const [tests, setTests] = useState([]);
-
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -26,6 +25,15 @@ const CalendarPage = () => {
       });
   };
 
+  useEffect(() => {
+    getQuestions();
+  }, []);
+
+  useEffect(() => {
+    // Call mapData only when tests state is updated
+    mapData();
+  }, [tests]);
+
   const mapData = () => {
     const dates = tests.map((test) => {
       return {
@@ -34,15 +42,7 @@ const CalendarPage = () => {
       };
     });
     setDates(dates);
-  }
-
-  useEffect(() => {
-    getQuestions();
-    mapData();
-  }, []);
-
-
-  
+  };
 
   const [dates, setDates] = useState([
     { date: "2024-05-08", content: "Biology" },
@@ -87,7 +87,6 @@ const CalendarPage = () => {
               }}
             >
               {/*  Home  */}
-
               <Breadcrumb>
                 <h1>Hello {USER}!</h1>
               </Breadcrumb>
@@ -100,8 +99,7 @@ const CalendarPage = () => {
                 borderRadius: borderRadiusLG,
               }}
             >
-              {/* CalenderPage */}
-              {/* <Calendars events={events}/> */}
+              {/* CalendarPage */}
               <Calendars dates={dates} />
             </div>
           </Content>
@@ -110,4 +108,5 @@ const CalendarPage = () => {
     </div>
   );
 };
+
 export default CalendarPage;

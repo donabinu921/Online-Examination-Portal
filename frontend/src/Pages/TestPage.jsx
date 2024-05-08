@@ -73,7 +73,7 @@ const TestPage = ({ testName }) => {
   };
 
   const findMarks = () => {
-    let mark = 1;
+    let mark = 0;
     selectedOptions.forEach((item) => {
       const question = test.questions[item.questionIndex];
       if (item.value === question.answer) {

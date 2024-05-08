@@ -11,7 +11,7 @@ const { Header, Content, Sider } = Layout;
 
 const TeacherRetests = () => {
   const USER = JSON.parse(window.localStorage.getItem("USER"));
-  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
+  const USER_ID = (window.localStorage.getItem("USER_ID"));
   const [index, setIndex] = useState(0);
   const [collapsed, setCollapsed] = useState(false);
   const {
