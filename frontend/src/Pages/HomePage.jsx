@@ -13,50 +13,62 @@ const HomePage = () => {
   const [tests, setTests] = useState([]);
   const [marks, setMarks] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
+  const [results, setResults] = useState([]);
+  const [testScores, setTestScores] = useState([
+    { test_name: "Biology", mark: 50 },
+    { test_name: "Physics", mark: 65 },
+    { test_name: "Chemistry", mark: 55 },
+  ]);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const getResults = () => {
-
-    userService.getResults().then((res) => {
-      console.log(res.data.results);
-
-    }).catch((error) => {
-      console.log(error);
-    });
-  
-
+  useEffect(() => {
     userService
       .getAllTests()
       .then((res) => {
-        console.log(res.data.tests);
         setTests(
           res.data.tests.map((item) => {
-            return{
+            return {
               test_id: item._id,
               test_name: item.test_name,
-            }
+            };
           })
         );
       })
       .catch((error) => {
         console.log(error);
       });
-  };
-
-
+  }, []); // Empty dependency array to fetch tests only once when the component mounts
+  
   useEffect(() => {
-    getResults();
-  }, []);
-
-  const [testScores,setTestScores] = useState([
-    { test_name: "Biology", mark: 50 },
-    { test_name: "Physics", mark: 65 },
-    { test_name: "Chemistry", mark: 55 },
-  ]);
-
-  console.log(tests)
+    // Check if tests are populated before processing test results
+    if (tests.length > 0) {
+      userService
+        .getResults()
+        .then((res) => {
+          const _res = res.data.test_results.filter(
+            (result) => result.student_id === USER_ID
+          );
+          setResults(_res);
+  
+          const score = _res.map((result) => {
+            const test = tests.find((item) => item.test_id === result.test_id);
+            return {
+              test_name: test.test_name,
+              mark: result.mark,
+            };
+          });
+          setTestScores(score);
+  
+          console.log(testScores);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [tests]); // Watch for changes to the tests state
+  
   return (
     <div className="home-page">
       <Layout

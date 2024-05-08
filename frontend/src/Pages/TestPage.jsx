@@ -68,22 +68,25 @@ const TestPage = ({ testName }) => {
       value: e.target.value,
     };
     setSelectedOptions(newSelectedOptions);
+    findMarks();
     //console.log(selectedOptions, "selectedOptions");
   };
 
   const findMarks = () => {
-    setMarks(0); // Reset marks to 0
-    let mark = 0; // Functional update to ensure correct value
+    let mark = 1;
     selectedOptions.forEach((item) => {
-      if (item.value === test.questions[item.questionIndex].answer) {
-        mark = mark + 1; // Functional update to ensure correct value
+      const question = test.questions[item.questionIndex];
+      if (item.value === question.answer) {
+        mark += 1; // Increment marks by 1 for each correct answer
       } else {
-        console.log("Incorrect");
+        // Optionally, you can handle incorrect answers here
+        console.log("Incorrect answer for question:", question.question);
       }
     });
-    setMarks(mark); // Update marks
-    };
-
+    setMarks(mark); // Update marks state
+    console.log("Marks:", mark);
+  };
+  
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -96,11 +99,11 @@ const TestPage = ({ testName }) => {
     const result = {
       test_id: testID,
       student_id: window.localStorage.getItem("USER_ID"),
-      mark: marks,
+      mark: marks+1,
       max_mark: max,
     };
 
-    console.log(result,"Result");
+    console.log("Result");
 
     userService
       .postResults({
