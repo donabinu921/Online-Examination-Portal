@@ -1,18 +1,23 @@
-import { useState } from "react"
-import { Button } from "antd"
-import NavBar from "../../Components/NavBar"
-import Cards from "../../Components/Cards"
-import "../../Styles/TeacherHome.css"
-import Results from "../../Components/Results"
+
+import { useState, useEffect } from "react";
+import { Button } from "antd";
+import NavBar from "../../Components/NavBar";
+import Cards from "../../Components/Cards";
+import "../../Styles/TeacherHome.css";
+import Results from "../../Components/Results";
+import userService from "../../Services/service.js";
+
 
 import { Breadcrumb, Layout, theme } from "antd"
 const { Header, Content, Sider } = Layout
 
 const TeacherHome = () => {
-  const USER = JSON.parse(window.localStorage.getItem("USER"))
-  const USER_ID = window.localStorage.getItem("USER_ID")
 
-  const [collapsed, setCollapsed] = useState(false)
+  const USER = JSON.parse(window.localStorage.getItem("USER"));
+  const USER_ID = window.localStorage.getItem("USER_ID");
+
+  const [collapsed, setCollapsed] = useState(false);
+ 
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken()
@@ -21,23 +26,12 @@ const TeacherHome = () => {
   const toggleResultsTab = () => {
     setShowResultsTab(prev => !prev)
   }
-
-  const [results, setResults] = useState([
-    {
-      id: 1,
-      testName: "Test 1",
-    },
-    {
-      id: 2,
-      testName: "Test 2",
-    },
-    {
-      id: 3,
-      testName: "Test 3",
-    },
-  ])
-
+ 
   const [selectedResultId, setSelectedResultId] = useState(false)
+ 
+  const [results, setResults] = useState([]);
+  const [selectedResultId, setSelectedResultId] = useState(false);
+ 
 
   const handleResults = id => {
     console.log(id)
@@ -47,6 +41,20 @@ const TeacherHome = () => {
       setSelectedResultId(id)
     }
   }
+
+  useEffect(() => {
+    userService
+      .getAllTests()
+      .then((res) => {
+        const teacherTests = res.data.tests.filter(
+          (test) => test.teacher_id === USER_ID
+        );
+        setResults(teacherTests);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <div className="teacher-home">
@@ -96,14 +104,16 @@ const TeacherHome = () => {
                 <div>
                   <br />
                   <div className="test-tab">
-                    {results.map(result => (
-                      <div key={result.id} className="test-bar">
-                        <h3>{result.testName}</h3>
+
+                    {results.map((result) => (
+                      <div key={result._id} className="test-bar">
+                        <h3>{result.test_name}</h3>
+ 
                         <Button
-                          id={result.id}
+                          id={result._id}
                           type="primary"
                           className="result-button"
-                          onClick={() => handleResults(result.id)}
+                          onClick={() => handleResults(result._id)}
                         >
                           Results
                         </Button>

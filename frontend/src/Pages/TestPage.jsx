@@ -5,6 +5,7 @@ import Timer from "../Components/Timer"
 import userService from "../Services/service.js"
 import { toast } from "react-toastify"
 
+
 const TestPage = ({ testName }) => {
   const [marks, setMarks] = useState(0)
   const [test, setTest] = useState({})
@@ -12,6 +13,7 @@ const TestPage = ({ testName }) => {
   const [testAttend, setTestAttend] = useState(false)
   const testID = window.localStorage.getItem("TEST_ID")
   const [selectedOptions, setSelectedOptions] = useState([])
+
 
   const navigate = useNavigate()
 
@@ -43,9 +45,11 @@ const TestPage = ({ testName }) => {
   }
 
   const findMarks = () => {
+
     let mark = 0
     selectedOptions.forEach(item => {
       const question = test.questions[item.questionIndex]
+
       if (item.value === question.answer) {
         mark += 1 // Increment marks by 1 for each correct answer
       } else {

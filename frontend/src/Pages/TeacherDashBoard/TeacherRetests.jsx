@@ -10,10 +10,12 @@ import { Breadcrumb, Layout, theme } from "antd"
 const { Header, Content, Sider } = Layout
 
 const TeacherRetests = () => {
-  const USER = JSON.parse(window.localStorage.getItem("USER"))
-  const USER_ID = window.localStorage.getItem("USER_ID")
-  const [index, setIndex] = useState(0)
-  const [collapsed, setCollapsed] = useState(false)
+
+  const USER = JSON.parse(window.localStorage.getItem("USER"));
+  const USER_ID = (window.localStorage.getItem("USER_ID"));
+  const [index, setIndex] = useState(0);
+  const [collapsed, setCollapsed] = useState(false);
+ 
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken()

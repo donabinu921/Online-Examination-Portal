@@ -1,21 +1,28 @@
-import React, { useState } from "react"
-import { Breadcrumb, Layout, theme } from "antd"
-import { Button, Input, Select, DatePicker } from "antd"
-import "../../Styles/CreateTestForm.css"
-import { useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
-import moment from "moment"
-import NavBar from "../../Components/NavBar"
-import Cards from "../../Components/Cards"
-import userService from "../../Services/service.js"
-import "../../Styles/TeacherTests.css"
-const { Header, Content, Sider } = Layout
-const { Option } = Select
+
+import React,{ useState } from "react";
+import { Breadcrumb, Layout, theme } from "antd";
+import { Button, Input, Select, DatePicker } from "antd";
+import "../../Styles/CreateTestForm.css";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import moment from "moment";
+import NavBar from "../../Components/NavBar";
+import userService from "../../Services/service.js";
+import "../../Styles/TeacherTests.css";
+const { Header, Content, Sider } = Layout;
+const { Option } = Select;
+
+
 const TeacherTests = () => {
   const USER = JSON.parse(window.localStorage.getItem("USER"))
   const USER_ID = window.localStorage.getItem("USER_ID")
 
-  const [collapsed, setCollapsed] = useState(false)
+
+  const USER = JSON.parse(window.localStorage.getItem("USER"));
+  const USER_ID = window.localStorage.getItem("USER_ID")
+
+  const [collapsed, setCollapsed] = useState(false);
+
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -75,6 +82,7 @@ const TeacherTests = () => {
     // console.log("Scheduled date: ", scheduledDate);
 
     const test = {
+      teacher_id: USER_ID,
       test_name: testName,
       test_date: scheduledDate,
       questions: questions.map((question, index) => ({
