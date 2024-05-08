@@ -11,7 +11,7 @@ export default class testController {
   }
   static async apiCreateTest(req, res, next) {
     try {
-      const { test_name, test_date, questions } = req.body
+      const { teacher_id,test_name, test_date, questions } = req.body
 
       if (!test_name || !test_date || !questions || questions.length === 0) {
         return res.status(400).json({ error: "Missing required fields" })
@@ -29,6 +29,7 @@ export default class testController {
         return res.status(400).json({ error: "Invalid question structure" })
       }
       const test = {
+        teacher_id,
         test_name,
         test_date,
         questions,
