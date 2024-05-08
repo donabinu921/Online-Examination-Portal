@@ -21,4 +21,13 @@ export default class testDAO {
       return { testsList: [], totalNumTests: 0 }
     }
   }
+  static async addTest(test) {
+    try {
+      await tests.insertOne(test)
+      return { status: "success" }
+    } catch (e) {
+      console.error(`Unable to add test: ${e}`)
+      return { status: "error" }
+    }
+  }
 }
