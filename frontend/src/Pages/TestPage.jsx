@@ -142,7 +142,7 @@ const TestPage = ({ testName }) => {
         </div>
       ) : (
         <div>
-          <h1>Test have already attended</h1>
+          <h1>Test has already attended</h1>
         </div>
       )}
     </>

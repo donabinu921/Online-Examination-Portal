@@ -14,9 +14,6 @@ const { Option } = Select;
 
 
 const TeacherTests = () => {
-  const USER = JSON.parse(window.localStorage.getItem("USER"))
-  const USER_ID = window.localStorage.getItem("USER_ID")
-
 
   const USER = JSON.parse(window.localStorage.getItem("USER"));
   const USER_ID = window.localStorage.getItem("USER_ID")
