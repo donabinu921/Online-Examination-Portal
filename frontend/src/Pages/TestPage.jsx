@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import "../Styles/TestForm.css";
 import axios from "axios";
 import userService from "../Services/service.js";
+import { toast } from "react-toastify";
 
 const TestPage = ({ testName }) => {
   const [marks, setMarks] = useState(0);
@@ -40,24 +41,24 @@ const TestPage = ({ testName }) => {
   const [max, setMax] = useState(0);
   const testID = window.localStorage.getItem("TEST_ID");
 
-  // const getQuestions = () => {
-  //   userService
-  //     .getAllTests()
-  //     .then((res) => {
-  //       const tests = res.data.tests;
+  const getQuestions = () => {
+    userService
+      .getAllTests()
+      .then((res) => {
+        const tests = res.data.tests;
 
-  //       const _test = tests.find((test) => test._id === testID);
-  //       setTest(_test);
-  //       console.log(_test);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+        const _test = tests.find((test) => test._id === testID);
+        setTest(_test);
+        console.log(_test);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-  // useEffect(() => {
-  //   getQuestions();
-  // }, []);
+  useEffect(() => {
+    getQuestions();
+  }, []);
 
   const [selectedOptions, setSelectedOptions] = useState([]);
 
@@ -72,30 +73,43 @@ const TestPage = ({ testName }) => {
   };
 
   const findMarks = () => {
-
     setMarks(0); // Reset marks to 0
     let mark = 0; // Functional update to ensure correct value
     selectedOptions.forEach((item) => {
       if (item.value === test.questions[item.questionIndex].answer) {
-          mark=mark+1 // Functional update to ensure correct value
+        mark = mark + 1; // Functional update to ensure correct value
       } else {
         console.log("Incorrect");
       }
-      
-    }
-  );
-  setMarks(mark); // Update marks
-  console.log("Marks", marks);
+    });
+    setMarks(mark); // Update marks
+    console.log("Marks", marks);
   };
 
   const navigate = useNavigate();
-  
+
   const handleSubmit = (e) => {
- // Reset marks to 0
+    // Reset marks to 0
     e.preventDefault();
     setMax(test.questions.length);
     findMarks();
     // navigate("/assessment");
+
+    userService
+      .postResults({
+        test_id: testID,
+        mark: marks,
+        max_mark: max,
+        student_id: window.localStorage.getItem("USER_ID")
+      })
+      .then((res) => {
+        console.log(res.data);
+        navigate("/assessment");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error submitting test");
+      });
   };
 
   useEffect(() => {
