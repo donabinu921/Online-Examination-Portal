@@ -9,7 +9,7 @@ const { Header, Content, Sider } = Layout;
 
 const HomePage = () => {
   const USER = JSON.parse(window.localStorage.getItem("USER"));
-  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
+  const USER_ID = window.localStorage.getItem("USER_ID");
   const [tests, setTests] = useState([]);
   const [marks, setMarks] = useState([]);
   const [collapsed, setCollapsed] = useState(false);
@@ -21,6 +21,7 @@ const HomePage = () => {
 
     userService.getResults().then((res) => {
       console.log(res.data.results);
+
     }).catch((error) => {
       console.log(error);
     });

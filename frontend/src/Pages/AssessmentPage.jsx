@@ -13,7 +13,7 @@ const { Header, Content, Sider } = Layout;
 const AssessmentPage = () => {
 
   const USER = JSON.parse(window.localStorage.getItem("USER"));
-  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
+  const USER_ID = (window.localStorage.getItem("USER_ID"));
 
 
   console.log(moment().format('YYYY-MM-DD'))

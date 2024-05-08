@@ -49,7 +49,6 @@ const TestPage = ({ testName }) => {
 
         const _test = tests.find((test) => test._id === testID);
         setTest(_test);
-        console.log(_test);
       })
       .catch((error) => {
         console.log(error);
@@ -83,8 +82,7 @@ const TestPage = ({ testName }) => {
       }
     });
     setMarks(mark); // Update marks
-    console.log("Marks", marks);
-  };
+    };
 
   const navigate = useNavigate();
 
@@ -95,15 +93,24 @@ const TestPage = ({ testName }) => {
     findMarks();
     // navigate("/assessment");
 
+    const result = {
+      test_id: testID,
+      student_id: window.localStorage.getItem("USER_ID"),
+      mark: marks,
+      max_mark: max,
+    };
+
+    console.log(result,"Result");
+
     userService
       .postResults({
         test_id: testID,
+        student_id: window.localStorage.getItem("USER_ID"),
         mark: marks,
         max_mark: max,
-        student_id: window.localStorage.getItem("USER_ID")
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         navigate("/assessment");
       })
       .catch((error) => {
@@ -113,7 +120,6 @@ const TestPage = ({ testName }) => {
   };
 
   useEffect(() => {
-    console.log("Marks updated:", marks);
   }, [marks]); // useEffect will run whenever marks state changes
 
   return (
