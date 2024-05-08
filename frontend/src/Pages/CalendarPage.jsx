@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Calendars from "../Components/Calendars";
 import NavBar from "../Components/NavBar";
 import userService from "../Services/service.js";
@@ -8,17 +8,46 @@ const { Header, Content, Sider } = Layout;
 const CalendarPage = () => {
   const USER = JSON.parse(window.localStorage.getItem("USER"));
   const USER_ID =  (window.localStorage.getItem("USER_ID"));
+  const [tests, setTests] = useState([]);
 
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const getQuestions = () => {
+    userService
+      .getAllTests()
+      .then((res) => {
+        setTests(res.data.tests);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const mapData = () => {
+    const dates = tests.map((test) => {
+      return {
+        date: test.test_date,
+        content: test.test_name,
+      };
+    });
+    setDates(dates);
+  }
+
+  useEffect(() => {
+    getQuestions();
+    mapData();
+  }, []);
+
+
   
+
   const [dates, setDates] = useState([
     { date: "2024-05-08", content: "Biology" },
     { date: "2024-05-10", content: "Chemistry" },
-    // Add more dates and their corresponding content as needed
+    // Add more dates and their corresponding test_name as needed
   ]);
 
   return (
