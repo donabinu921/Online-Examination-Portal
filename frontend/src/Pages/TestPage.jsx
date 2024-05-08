@@ -8,7 +8,7 @@ import axios from "axios";
 import userService from "../Services/service.js";
 import { toast } from "react-toastify";
 
-const TestPage = ({ testName }) => {
+const TestPage = ({}) => {
   const [marks, setMarks] = useState(0);
   const [test, setTest] = useState({
     test_id: "123",
