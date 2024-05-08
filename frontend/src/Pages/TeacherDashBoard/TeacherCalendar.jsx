@@ -15,6 +15,12 @@ const CalendarPage = () => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  const [dates,setDates] = useState([
+    { date: '2024-05-08', content: 'Biology' },
+    { date: '2024-05-10', content: 'Chemistry' },
+    // Add more dates and their corresponding content as needed
+  ]);
+
   return (
     <div className="home-page">
       <Layout
@@ -64,7 +70,7 @@ const CalendarPage = () => {
                 borderRadius: borderRadiusLG,
               }}
             >
-              <Calendars />
+              <Calendars dates={dates}/>
             </div>
           </Content>
         </Layout>

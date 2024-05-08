@@ -6,7 +6,6 @@ import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
 
 const CalendarPage = () => {
-
   const USER = JSON.parse(window.localStorage.getItem("USER"));
   const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
 
@@ -14,6 +13,12 @@ const CalendarPage = () => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const [dates, setDates] = useState([
+    { date: "2024-05-08", content: "Biology" },
+    { date: "2024-05-10", content: "Chemistry" },
+    // Add more dates and their corresponding content as needed
+  ]);
 
   return (
     <div className="home-page">
@@ -67,7 +72,7 @@ const CalendarPage = () => {
             >
               {/* CalenderPage */}
               {/* <Calendars events={events}/> */}
-              <Calendars />
+              <Calendars dates={dates} />
             </div>
           </Content>
         </Layout>

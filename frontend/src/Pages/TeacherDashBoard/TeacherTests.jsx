@@ -7,10 +7,10 @@ import { toast } from "react-toastify";
 import moment from "moment";
 import NavBar from "../../Components/NavBar";
 import Cards from "../../Components/Cards";
+import userService from "../../Services/service.js";
 import "../../Styles/TeacherTests.css";
 const { Header, Content, Sider } = Layout;
 const { Option } = Select;
-
 const TeacherTests = () => {
 
   const USER = JSON.parse(window.localStorage.getItem("USER"));
@@ -76,21 +76,6 @@ const TeacherTests = () => {
     // console.log("Test Name: ", testName);
     // console.log("Scheduled date: ", scheduledDate);
 
- 
-
-    // .post("http://localhost:3000/api/tests", {
-    //   test_name: testName,
-    //   test_date: scheduledDate,
-    //   questions: test_questions,
-    // })
-    // .then((res) => {
-    //   console.log(res.data);
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // }
-    // );
-
     const test = {
       test_name: testName,
       test_date: scheduledDate,
@@ -99,11 +84,25 @@ const TeacherTests = () => {
         options: question.options,
         answer: question.correctAnswer, }))
     };
+ 
+      
+      
+      userService
+        .createTest(test)
+        .then((res) => {
+          console.log(res,"RESPP");
+          toast.success("Test Created Successfully");
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Test Creation Failed");
+        });
   
-    console.log(test);
+    
+
+
  
     setCreateMode(false);
-    toast.success("Test Created Successfully");
   };
   
   return (
