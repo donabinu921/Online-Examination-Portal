@@ -26,9 +26,7 @@ const TeacherHome = () => {
   const toggleResultsTab = () => {
     setShowResultsTab(prev => !prev)
   }
- 
-  const [selectedResultId, setSelectedResultId] = useState(false)
- 
+  
   const [results, setResults] = useState([]);
   const [selectedResultId, setSelectedResultId] = useState(false);
  
