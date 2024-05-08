@@ -52,7 +52,7 @@ const LoginSignUp = () => {
     if (foundUser) {
       setLoginUser(foundUser.username);
       window.localStorage.setItem("USER", JSON.stringify(foundUser.username));
-      window.localStorage.setItem("USER_ID", JSON.stringify(foundUser._id));
+      window.localStorage.setItem("USER_ID", foundUser._id);
       if (userType === "student" && foundUser.pos === "student") {
         navigate("/home");
         console.log("success");

@@ -49,7 +49,6 @@ const TestPage = ({ testName }) => {
 
         const _test = tests.find((test) => test._id === testID);
         setTest(_test);
-        console.log(_test);
       })
       .catch((error) => {
         console.log(error);
@@ -69,23 +68,25 @@ const TestPage = ({ testName }) => {
       value: e.target.value,
     };
     setSelectedOptions(newSelectedOptions);
+    findMarks();
     //console.log(selectedOptions, "selectedOptions");
   };
 
   const findMarks = () => {
-    setMarks(0); // Reset marks to 0
-    let mark = 0; // Functional update to ensure correct value
+    let mark = 1;
     selectedOptions.forEach((item) => {
-      if (item.value === test.questions[item.questionIndex].answer) {
-        mark = mark + 1; // Functional update to ensure correct value
+      const question = test.questions[item.questionIndex];
+      if (item.value === question.answer) {
+        mark += 1; // Increment marks by 1 for each correct answer
       } else {
-        console.log("Incorrect");
+        // Optionally, you can handle incorrect answers here
+        console.log("Incorrect answer for question:", question.question);
       }
     });
-    setMarks(mark); // Update marks
-    console.log("Marks", marks);
+    setMarks(mark); // Update marks state
+    console.log("Marks:", mark);
   };
-
+  
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -95,15 +96,24 @@ const TestPage = ({ testName }) => {
     findMarks();
     // navigate("/assessment");
 
+    const result = {
+      test_id: testID,
+      student_id: window.localStorage.getItem("USER_ID"),
+      mark: marks+1,
+      max_mark: max,
+    };
+
+    console.log("Result");
+
     userService
       .postResults({
         test_id: testID,
+        student_id: window.localStorage.getItem("USER_ID"),
         mark: marks,
         max_mark: max,
-        student_id: window.localStorage.getItem("USER_ID")
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         navigate("/assessment");
       })
       .catch((error) => {
@@ -113,7 +123,6 @@ const TestPage = ({ testName }) => {
   };
 
   useEffect(() => {
-    console.log("Marks updated:", marks);
   }, [marks]); // useEffect will run whenever marks state changes
 
   return (
