@@ -63,7 +63,7 @@ function CreateTestForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Test Name: ", testName);
+    console.log("Test Name: ", +testName);
     console.log("Scheduled date: ", scheduledDate);
     
     const test_questions = {

@@ -10,7 +10,7 @@ import userService from "../Services/service.js";
 const TestPage = ({ testName }) => {
   const [marks, setMarks] = useState(0);
   const [test, setTest] = useState({
-    id: "123",
+    test_id: "123",
     test_name: "Andi Kundi",
     test_date: "2024-05-31",
     questions: [
