@@ -1,12 +1,48 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Calendars from "../../Components/Calendars";
 import NavBar from "../../Components/NavBar";
-
+import userService from "../../Services/service.js";
 import { Breadcrumb, Layout, theme } from "antd";
 const { Header, Content, Sider } = Layout;
 
 const CalendarPage = () => {
+  const [tests, setTests] = useState([]);
 
+  const getQuestions = () => {
+    userService
+      .getAllTests()
+      .then((res) => {
+        setTests(res.data.tests);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getQuestions();
+  }, []);
+
+  useEffect(() => {
+    // Call mapData only when tests state is updated
+    mapData();
+  }, [tests]);
+
+  const mapData = () => {
+    const dates = tests.map((test) => {
+      return {
+        date: test.test_date,
+        content: test.test_name,
+      };
+    });
+    setDates(dates);
+  };
+
+  const [dates, setDates] = useState([
+    { date: "2024-05-08", content: "Biology" },
+    { date: "2024-05-10", content: "Chemistry" },
+    // Add more dates and their corresponding test_name as needed
+  ]);
   const USER = JSON.parse(window.localStorage.getItem("USER"));
   const USER_ID = (window.localStorage.getItem("USER_ID"));
 
@@ -64,7 +100,7 @@ const CalendarPage = () => {
                 borderRadius: borderRadiusLG,
               }}
             >
-              <Calendars />
+              <Calendars dates={dates}/>
             </div>
           </Content>
         </Layout>
