@@ -1,27 +1,26 @@
-import { useState } from "react";
-import { Button } from "antd";
-import NavBar from "../../Components/NavBar";
-import Cards from "../../Components/Cards";
-import "../../Styles/TeacherHome.css";
-import Results from "../../Components/Results";
+import { useState } from "react"
+import { Button } from "antd"
+import NavBar from "../../Components/NavBar"
+import Cards from "../../Components/Cards"
+import "../../Styles/TeacherHome.css"
+import Results from "../../Components/Results"
 
-import { Breadcrumb, Layout, theme } from "antd";
-const { Header, Content, Sider } = Layout;
+import { Breadcrumb, Layout, theme } from "antd"
+const { Header, Content, Sider } = Layout
 
 const TeacherHome = () => {
+  const USER = JSON.parse(window.localStorage.getItem("USER"))
+  const USER_ID = window.localStorage.getItem("USER_ID")
 
-  const USER = JSON.parse(window.localStorage.getItem("USER"));
-  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
-
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  } = theme.useToken()
 
-  const [showResultsTab, setShowResultsTab] = useState(false);
+  const [showResultsTab, setShowResultsTab] = useState(false)
   const toggleResultsTab = () => {
-    setShowResultsTab((prev) => !prev);
-  };
+    setShowResultsTab(prev => !prev)
+  }
 
   const [results, setResults] = useState([
     {
@@ -36,18 +35,18 @@ const TeacherHome = () => {
       id: 3,
       testName: "Test 3",
     },
-  ]);
+  ])
 
-  const [selectedResultId, setSelectedResultId] = useState(false);
+  const [selectedResultId, setSelectedResultId] = useState(false)
 
-  const handleResults = (id) => {
-    console.log(id);
+  const handleResults = id => {
+    console.log(id)
     if (selectedResultId === id) {
-      setSelectedResultId(false);
+      setSelectedResultId(false)
     } else {
-      setSelectedResultId(id);
+      setSelectedResultId(id)
     }
-  };
+  }
 
   return (
     <div className="teacher-home">
@@ -59,7 +58,7 @@ const TeacherHome = () => {
         <Sider
           collapsible
           collapsed={collapsed}
-          onCollapse={(value) => setCollapsed(value)}
+          onCollapse={value => setCollapsed(value)}
         >
           <div className="demo-logo-vertical" />
           <NavBar num={2} />
@@ -93,12 +92,11 @@ const TeacherHome = () => {
                 borderRadius: borderRadiusLG,
               }}
             >
-
               <div className="outer-box">
                 <div>
                   <br />
                   <div className="test-tab">
-                    {results.map((result) => (
+                    {results.map(result => (
                       <div key={result.id} className="test-bar">
                         <h3>{result.testName}</h3>
                         <Button
@@ -122,6 +120,6 @@ const TeacherHome = () => {
         </Layout>
       </Layout>
     </div>
-  );
-};
-export default TeacherHome;
+  )
+}
+export default TeacherHome

@@ -1,29 +1,29 @@
-import { useState } from "react";
-import Cards from "../../Components/Cards";
-import { Button } from "antd";
-import NavBar from "../../Components/NavBar";
-import Activities from "../../Components/Activities";
-import { toast } from "react-toastify";
+import { useState } from "react"
+import Cards from "../../Components/Cards"
+import { Button } from "antd"
+import NavBar from "../../Components/NavBar"
+import Activities from "../../Components/Activities"
+import { toast } from "react-toastify"
 import "../../Styles/TeacherRetests.css"
 
-import { Breadcrumb, Layout, theme } from "antd";
-const { Header, Content, Sider } = Layout;
+import { Breadcrumb, Layout, theme } from "antd"
+const { Header, Content, Sider } = Layout
 
 const TeacherRetests = () => {
-  const USER = JSON.parse(window.localStorage.getItem("USER"));
-  const USER_ID = JSON.parse(window.localStorage.getItem("USER_ID"));
-  const [index, setIndex] = useState(0);
-  const [collapsed, setCollapsed] = useState(false);
+  const USER = JSON.parse(window.localStorage.getItem("USER"))
+  const USER_ID = window.localStorage.getItem("USER_ID")
+  const [index, setIndex] = useState(0)
+  const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  } = theme.useToken()
 
-  const approveRequest = (index) => {
-    setIndex(index);
+  const approveRequest = index => {
+    setIndex(index)
 
-    console.log(retests[index].student_name,retests[index].test_name);
-    toast.success("Request approved");
-  };
+    console.log(retests[index].student_name, retests[index].test_name)
+    toast.success("Request approved")
+  }
 
   const [retests, setRetests] = useState([
     {
@@ -47,7 +47,7 @@ const TeacherRetests = () => {
       student_name: "John Doe",
       status: "Pending",
     },
-  ]);
+  ])
 
   return (
     <div className="home-page">
@@ -59,7 +59,7 @@ const TeacherRetests = () => {
         <Sider
           collapsible
           collapsed={collapsed}
-          onCollapse={(value) => setCollapsed(value)}
+          onCollapse={value => setCollapsed(value)}
         >
           <div className="demo-logo-vertical" />
           <NavBar num={2} />
@@ -98,11 +98,16 @@ const TeacherRetests = () => {
               {/* <h1>{index}</h1> */}
               <h2>Approve Requests:</h2>
 
-              {retests.map((retest,index) => (
+              {retests.map((retest, index) => (
                 <div key={retest.test_id} className="approve-requests-box">
                   <h3 className="name">{retest.student_name}</h3>
                   <h3 className="test-name">{retest.test_name}</h3>
-                  <Button type="primary" onClick={()=>{approveRequest(index)}}>
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      approveRequest(index)
+                    }}
+                  >
                     Approve
                   </Button>
                 </div>
@@ -112,6 +117,6 @@ const TeacherRetests = () => {
         </Layout>
       </Layout>
     </div>
-  );
-};
-export default TeacherRetests;
+  )
+}
+export default TeacherRetests

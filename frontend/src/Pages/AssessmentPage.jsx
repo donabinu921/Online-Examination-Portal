@@ -1,54 +1,48 @@
-import { useState,useEffect } from "react";
-import NavBar from "../Components/NavBar";
-import { Button } from "antd";
-import { Breadcrumb, Layout, theme } from "antd";
-import { useNavigate } from "react-router-dom";
-import userService from "../Services/service.js";
-import { Link } from "react-router-dom";
-import "../Styles/AssessmentPage.css";
-import moment from 'moment'; 
-const { Header, Content, Sider } = Layout;
-
+import { useState, useEffect } from "react"
+import NavBar from "../Components/NavBar"
+import { Button } from "antd"
+import { Breadcrumb, Layout, theme } from "antd"
+import { useNavigate } from "react-router-dom"
+import userService from "../Services/service.js"
+import { Link } from "react-router-dom"
+import "../Styles/AssessmentPage.css"
+import moment from "moment"
+const { Header, Content, Sider } = Layout
 
 const AssessmentPage = () => {
+  const USER = JSON.parse(window.localStorage.getItem("USER"))
+  const USER_ID = window.localStorage.getItem("USER_ID")
 
-  const USER = JSON.parse(window.localStorage.getItem("USER"));
-  const USER_ID = (window.localStorage.getItem("USER_ID"));
+  console.log(moment().format("YYYY-MM-DD"))
+  const [tests, setTests] = useState([])
+  const [testAttend, setTestAttend] = useState(false)
 
-
-  console.log(moment().format('YYYY-MM-DD'))
-  const [tests,setTests] = useState([]);
-  
   const getQuestions = () => {
-    userService.getAllTests()
-    .then((res) => {
-      console.log(res.data.tests);
-      setTests(res.data.tests);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+    userService
+      .getAllTests()
+      .then(res => {
+        console.log(res.data.tests)
+        setTests(res.data.tests)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
 
-console.log(tests);
+  console.log(tests)
 
-useEffect(() => {
-  getQuestions();
-  window.localStorage.getItem("TEST_ID");
-}, []);
+  useEffect(() => {
+    getQuestions()
+    window.localStorage.getItem("TEST_ID")
+  }, [])
 
-
-
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(false)
   const {
     token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  } = theme.useToken()
 
- 
- 
-
-  const setTest = (id) => {
-    window.localStorage.setItem("TEST_ID", id);
+  const setTest = id => {
+    window.localStorage.setItem("TEST_ID", id)
   }
 
   return (
@@ -61,7 +55,7 @@ useEffect(() => {
         <Sider
           collapsible
           collapsed={collapsed}
-          onCollapse={(teacher_name) => setCollapsed(teacher_name)}
+          onCollapse={teacher_name => setCollapsed(teacher_name)}
         >
           <div className="demo-logo-vertical" />
           <NavBar />
@@ -96,15 +90,22 @@ useEffect(() => {
                 borderRadius: borderRadiusLG,
               }}
             >
-        
               <h2>Live Tests</h2>
               <div className="card">
-                {tests.map((item) => (
+                {tests.map(item => (
                   <div key={item._id} className="card-item">
                     <h3>{item.test_name}</h3>
                     <p>{item.teacher_name}</p>
+
                     <Link to="/test">
-                      <Button type="primary" onClick={()=>{setTest(item._id)}}>Go to Test</Button>
+                      <Button
+                        type="primary"
+                        onClick={() => {
+                          setTest(item._id)
+                        }}
+                      >
+                        Go to Test
+                      </Button>
                     </Link>
                   </div>
                 ))}
@@ -114,6 +115,6 @@ useEffect(() => {
         </Layout>
       </Layout>
     </div>
-  );
-};
-export default AssessmentPage;
+  )
+}
+export default AssessmentPage
