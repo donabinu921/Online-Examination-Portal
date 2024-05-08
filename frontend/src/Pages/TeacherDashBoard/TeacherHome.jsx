@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "antd";
 import NavBar from "../../Components/NavBar";
@@ -6,34 +7,40 @@ import "../../Styles/TeacherHome.css";
 import Results from "../../Components/Results";
 import userService from "../../Services/service.js";
 
-import { Breadcrumb, Layout, theme } from "antd";
-const { Header, Content, Sider } = Layout;
+
+import { Breadcrumb, Layout, theme } from "antd"
+const { Header, Content, Sider } = Layout
 
 const TeacherHome = () => {
+
   const USER = JSON.parse(window.localStorage.getItem("USER"));
   const USER_ID = window.localStorage.getItem("USER_ID");
 
   const [collapsed, setCollapsed] = useState(false);
+ 
   const {
     token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  } = theme.useToken()
 
-  const [showResultsTab, setShowResultsTab] = useState(false);
+  const [showResultsTab, setShowResultsTab] = useState(false)
   const toggleResultsTab = () => {
-    setShowResultsTab((prev) => !prev);
-  };
-
+    setShowResultsTab(prev => !prev)
+  }
+ 
+  const [selectedResultId, setSelectedResultId] = useState(false)
+ 
   const [results, setResults] = useState([]);
   const [selectedResultId, setSelectedResultId] = useState(false);
+ 
 
-  const handleResults = (id) => {
-    console.log(id);
+  const handleResults = id => {
+    console.log(id)
     if (selectedResultId === id) {
-      setSelectedResultId(false);
+      setSelectedResultId(false)
     } else {
-      setSelectedResultId(id);
+      setSelectedResultId(id)
     }
-  };
+  }
 
   useEffect(() => {
     userService
@@ -59,7 +66,7 @@ const TeacherHome = () => {
         <Sider
           collapsible
           collapsed={collapsed}
-          onCollapse={(value) => setCollapsed(value)}
+          onCollapse={value => setCollapsed(value)}
         >
           <div className="demo-logo-vertical" />
           <NavBar num={2} />
@@ -97,9 +104,11 @@ const TeacherHome = () => {
                 <div>
                   <br />
                   <div className="test-tab">
+
                     {results.map((result) => (
                       <div key={result._id} className="test-bar">
                         <h3>{result.test_name}</h3>
+ 
                         <Button
                           id={result._id}
                           type="primary"
@@ -121,6 +130,6 @@ const TeacherHome = () => {
         </Layout>
       </Layout>
     </div>
-  );
-};
-export default TeacherHome;
+  )
+}
+export default TeacherHome

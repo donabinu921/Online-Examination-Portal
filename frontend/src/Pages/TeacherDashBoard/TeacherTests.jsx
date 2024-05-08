@@ -1,3 +1,4 @@
+
 import React,{ useState } from "react";
 import { Breadcrumb, Layout, theme } from "antd";
 import { Button, Input, Select, DatePicker } from "antd";
@@ -11,68 +12,72 @@ import "../../Styles/TeacherTests.css";
 const { Header, Content, Sider } = Layout;
 const { Option } = Select;
 
+
 const TeacherTests = () => {
+  const USER = JSON.parse(window.localStorage.getItem("USER"))
+  const USER_ID = window.localStorage.getItem("USER_ID")
+
 
   const USER = JSON.parse(window.localStorage.getItem("USER"));
   const USER_ID = window.localStorage.getItem("USER_ID")
 
   const [collapsed, setCollapsed] = useState(false);
 
+
   const {
     token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  } = theme.useToken()
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [testName, setTestName] = useState("");
-  const [scheduledDate, setScheduledDate] = useState("");
-  const [questions, setQuestions] = useState([]);
-  const [createMode, setCreateMode] = useState(false);
+  const [testName, setTestName] = useState("")
+  const [scheduledDate, setScheduledDate] = useState("")
+  const [questions, setQuestions] = useState([])
+  const [createMode, setCreateMode] = useState(false)
 
   const addQuestion = () => {
     const newQuestion = {
       question: "",
       options: ["", "", "", ""],
       correctAnswer: "",
-    };
-    setQuestions([...questions, newQuestion]);
-  };
+    }
+    setQuestions([...questions, newQuestion])
+  }
 
-  const handleTestNameChange = (e) => {
-    setTestName(e.target.value);
-  };
+  const handleTestNameChange = e => {
+    setTestName(e.target.value)
+  }
 
   const handleDateChange = (date, dateString) => {
-    setScheduledDate(dateString);
- 
-  };
+    setScheduledDate(dateString)
+  }
 
   const handleQuestionChange = (index, value) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[index].question = value;
-    setQuestions(updatedQuestions);
-  };
+    const updatedQuestions = [...questions]
+    updatedQuestions[index].question = value
+    setQuestions(updatedQuestions)
+  }
 
   const handleOptionChange = (questionIndex, optionIndex, value) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[questionIndex].options[optionIndex] = value;
-    setQuestions(updatedQuestions);
-  };
+    const updatedQuestions = [...questions]
+    updatedQuestions[questionIndex].options[optionIndex] = value
+    setQuestions(updatedQuestions)
+  }
 
   const handleCorrectAnswerChange = (questionIndex, value) => {
-    const updatedQuestions = [...questions];
+    const updatedQuestions = [...questions]
     updatedQuestions[questionIndex].correctAnswer =
-      updatedQuestions[questionIndex].options[value];
-    setQuestions(updatedQuestions);
-  };
+      updatedQuestions[questionIndex].options[value]
+    setQuestions(updatedQuestions)
+  }
 
-  const disabledDate = (current) => {
+  const disabledDate = current => {
     // Can not select days before today and today
-    return current && current < moment().endOf("day");
-  };
+    return current && current < moment().endOf("day")
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = e => {
+    e.preventDefault()
     // console.log("Test Name: ", testName);
     // console.log("Scheduled date: ", scheduledDate);
 
@@ -83,41 +88,36 @@ const TeacherTests = () => {
       questions: questions.map((question, index) => ({
         question: question.question,
         options: question.options,
-        answer: question.correctAnswer, }))
-    };
- 
-      
-      
-      userService
-        .createTest(test)
-        .then((res) => {
-          console.log(res,"RESPP");
-          toast.success("Test Created Successfully");
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error("Test Creation Failed");
-        });
-  
-    
+        answer: question.correctAnswer,
+      })),
+    }
 
+    userService
+      .createTest(test)
+      .then(res => {
+        console.log(res, "RESPP")
+        toast.success("Test Created Successfully")
+      })
+      .catch(error => {
+        console.log(error)
+        toast.error("Test Creation Failed")
+      })
 
- 
-    setCreateMode(false);
-  };
-  
+    setCreateMode(false)
+  }
+
   return (
     <div className="teacher-home">
       <Layout
         style={{
           minHeight: "100vh",
         }}
-        >
+      >
         <Sider
           collapsible
           collapsed={collapsed}
-          onCollapse={(value) => setCollapsed(value)}
-          >
+          onCollapse={value => setCollapsed(value)}
+        >
           <div className="demo-logo-vertical" />
           <NavBar num={2} />
         </Sider>
@@ -127,7 +127,7 @@ const TeacherTests = () => {
               padding: 0,
               background: colorBgContainer,
             }}
-            />
+          />
           <Content
             style={{
               margin: "0 16px",
@@ -137,7 +137,7 @@ const TeacherTests = () => {
               style={{
                 margin: "16px 0",
               }}
-              >
+            >
               {/*  Home  */}
 
               <Breadcrumb>
@@ -151,20 +151,17 @@ const TeacherTests = () => {
                 background: colorBgContainer,
                 borderRadius: borderRadiusLG,
               }}
-              >
-                {!createMode && (
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      setCreateMode(true);
-
-
-                      
-                    }}
-                  >
-                    + Create Test
-                  </Button>
-                  )}
+            >
+              {!createMode && (
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    setCreateMode(true)
+                  }}
+                >
+                  + Create Test
+                </Button>
+              )}
               {createMode && (
                 <div className="create-test-form">
                   <h2>Enter Test Name:</h2>
@@ -172,13 +169,13 @@ const TeacherTests = () => {
                     placeholder="Enter test name"
                     value={testName}
                     onChange={handleTestNameChange}
-                    />
+                  />
                   <br />
                   <br />
                   <DatePicker
                     onChange={handleDateChange}
                     disabledDate={disabledDate}
-                    />
+                  />
                   <br />
                   <br />
                   <Button type="primary" onClick={addQuestion}>
@@ -192,10 +189,10 @@ const TeacherTests = () => {
                       <Input
                         placeholder="Enter your question"
                         value={question.question}
-                        onChange={(e) =>
+                        onChange={e =>
                           handleQuestionChange(index, e.target.value)
                         }
-                        />
+                      />
 
                       {question.options.map((option, optionIndex) => (
                         <div key={optionIndex}>
@@ -204,14 +201,14 @@ const TeacherTests = () => {
                             <Input
                               placeholder={`Option ${optionIndex + 1}`}
                               value={option}
-                              onChange={(e) =>
+                              onChange={e =>
                                 handleOptionChange(
                                   index,
                                   optionIndex,
                                   e.target.value
                                 )
                               }
-                              />
+                            />
                           </label>
                           <br />
                         </div>
@@ -222,10 +219,10 @@ const TeacherTests = () => {
                         <Select
                           style={{ width: 120 }}
                           value={question.correctAnswer}
-                          onChange={(value) =>
+                          onChange={value =>
                             handleCorrectAnswerChange(index, value)
                           }
-                          >
+                        >
                           <Option value="0">Option 1</Option>
                           <Option value="1">Option 2</Option>
                           <Option value="2">Option 3</Option>
@@ -240,7 +237,7 @@ const TeacherTests = () => {
                     className="test-submit"
                     type="primary"
                     to="/teacher-tests"
-                    >
+                  >
                     Submit
                   </Button>
                 </div>
@@ -250,6 +247,6 @@ const TeacherTests = () => {
         </Layout>
       </Layout>
     </div>
-  );
-};
-export default TeacherTests;
+  )
+}
+export default TeacherTests
